@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+    <head>
+        
+        <script type="text/javascript">
+
+        var deckOne = [];
+        var deckTwo = [];
+        var playerOneCurrentCard = 0;
+        var playerTwoCurrentCard = 0;
+
+        for (var i = 1; i<=52; i++){
+            deckOne.push(i);
+        }
+
+        for (var i = 1; i<=52; i++){
+            deckTwo.push(i);
+        }
+
+        function playerOneDraw() {
+            console.log("Player One draws a card.");
+            console.log(deckOne[1]);
+        }
+
+        function playerTwoDraw(){
+            console.log("Player Two draws a card.");
+        }
+
+        </script>
+
+        <style type="text/css"></style>
+        </style>
+
+    </head>
+
+    <body>
+        <h1>THIS IS (simple) WAR!!!</h1>
+
+        <button onclick="playerOneDraw()" id="draw-one" type="button">Player 1 Draw</button>
+        <button onclick="playerTwoDraw()" id="draw-two" type="button">Player 2 Draw</button>
+
+    </body>
+</html>
