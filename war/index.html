@@ -2,13 +2,17 @@
 <html lang="en-us">
 
     <head>
+
+        <title>A Simple War App</title>
         
         <script type="text/javascript">
 
         var deckOne = [];
         var deckTwo = [];
-        var playerOneCurrentCard = 0;
-        var playerTwoCurrentCard = 0;
+        var deckOneCounter = 0;
+        var deckTwoCounter = 0;
+
+        //Initialize the decks
 
         for (var i = 1; i<=52; i++){
             deckOne.push(i);
@@ -18,18 +22,42 @@
             deckTwo.push(i);
         }
 
-        function playerOneDraw() {
-            console.log("Player One draws a card.");
-            console.log(deckOne[1]);
+        var playerOneCurrentCard = deckOne[deckOneCounter];
+        var playerTwoCurrentCard = deckTwo[deckTwoCounter];
+
+
+        function shuffleCards() {
+            //shuffle da cards!
         }
 
-        function playerTwoDraw(){
+        function draw() {
+            console.log("Player One draws a card.");
+            console.log(playerOneCurrentCard);
+
             console.log("Player Two draws a card.");
+            console.log(playerTwoCurrentCard);
+
+            //Compare the Two Cards to Determine Winner
+            if (playerOneCurrentCard > playerTwoCurrentCard) {
+                console.log("Player 1 Wins!");
+            } else if (playerTwoCurrentCard > playerOneCurrentCard) {
+                console.log("Player 2 Wins!");
+            } else {
+                console.log("It's a tie!");
+            }
+
+            //Take the next card on the deck to be the current card
+            playerOneCurrentCard = deckOne[deckOneCounter+1];
+            playerTwoCurrentCard = deckTwo[deckTwoCounter+1];
+
+            console.log(playerOneCurrentCard);
+            console.log(playerTwoCurrentCard);
+
         }
 
         </script>
 
-        <style type="text/css"></style>
+        <style type="text/css">
         </style>
 
     </head>
@@ -37,8 +65,7 @@
     <body>
         <h1>THIS IS (simple) WAR!!!</h1>
 
-        <button onclick="playerOneDraw()" id="draw-one" type="button">Player 1 Draw</button>
-        <button onclick="playerTwoDraw()" id="draw-two" type="button">Player 2 Draw</button>
+        <button onclick="draw()" id="draw" type="button">Draw!</button>
 
     </body>
 </html>
