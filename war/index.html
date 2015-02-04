@@ -12,7 +12,7 @@
         var deckOneCounter = 0;
         var deckTwoCounter = 0;
 
-        //Initialize the decks
+        // Populate the decks
 
         for (var i = 1; i<=52; i++){
             deckOne.push(i);
@@ -22,13 +22,31 @@
             deckTwo.push(i);
         }
 
+        // Shuffle the cards
+        shuffleCards(deckOne);
+        shuffleCards(deckTwo);
+
         var playerOneCurrentCard = deckOne[deckOneCounter];
         var playerTwoCurrentCard = deckTwo[deckTwoCounter];
 
+        // Shuffle function using the Fisher-Yates Method
+        function shuffleCards(array) {
+            var counter = array.length;
+            var temp;
+            var index;
 
-        function shuffleCards() {
-            //shuffle da cards!
+            while (counter > 0) {
+            index = Math.floor(Math.random() * counter);
+
+            counter--;
+
+            temp = array[counter];
+            array[counter] = array[index];
+            array[index] = temp;
         }
+
+        return array;
+    }
 
         function draw() {
             console.log("Player One draws a card.");
@@ -37,7 +55,7 @@
             console.log("Player Two draws a card.");
             console.log(playerTwoCurrentCard);
 
-            //Compare the Two Cards to Determine Winner
+            // Compare the Two Cards to Determine Winner
             if (playerOneCurrentCard > playerTwoCurrentCard) {
                 console.log("Player 1 Wins!");
             } else if (playerTwoCurrentCard > playerOneCurrentCard) {
@@ -46,12 +64,13 @@
                 console.log("It's a tie!");
             }
 
-            //Take the next card on the deck to be the current card
-            playerOneCurrentCard = deckOne[deckOneCounter+1];
-            playerTwoCurrentCard = deckTwo[deckTwoCounter+1];
+            // Increment the counters of each deck
+            deckOneCounter++;
+            deckTwoCounter++;
 
-            console.log(playerOneCurrentCard);
-            console.log(playerTwoCurrentCard);
+            // Take the next card on the deck to be the current card
+            playerOneCurrentCard = deckOne[deckOneCounter];
+            playerTwoCurrentCard = deckTwo[deckTwoCounter];
 
         }
 
