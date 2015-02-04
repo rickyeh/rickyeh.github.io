@@ -7,18 +7,22 @@
         
         <script type="text/javascript">
 
+
+        var numCards = 52;
         var deckOne = [];
         var deckTwo = [];
         var deckOneCounter = 0;
         var deckTwoCounter = 0;
+        var playerOneScore = 0;
+        var playerTwoScore = 0;
 
         // Populate the decks
 
-        for (var i = 1; i<=52; i++){
+        for (var i = 1; i<=numCards; i++){
             deckOne.push(i);
         }
 
-        for (var i = 1; i<=52; i++){
+        for (var i = 1; i<=numCards; i++){
             deckTwo.push(i);
         }
 
@@ -58,11 +62,16 @@
             // Compare the Two Cards to Determine Winner
             if (playerOneCurrentCard > playerTwoCurrentCard) {
                 console.log("Player 1 Wins!");
+                playerOneScore++;
             } else if (playerTwoCurrentCard > playerOneCurrentCard) {
                 console.log("Player 2 Wins!");
+                playerTwoScore++;
             } else {
                 console.log("It's a tie!");
             }
+
+            // Print the current Score
+            console.log("The current score is: Player One: " + playerOneScore + " -  Player Two: " + playerTwoScore);
 
             // Increment the counters of each deck
             deckOneCounter++;
@@ -71,6 +80,19 @@
             // Take the next card on the deck to be the current card
             playerOneCurrentCard = deckOne[deckOneCounter];
             playerTwoCurrentCard = deckTwo[deckTwoCounter];
+
+            //Determine winner if last card is pulled
+            if (deckOneCounter === numCards){
+                console.log("The game is over!  You're out of cards!");
+
+                if (playerOneScore > playerTwoScore) {
+                    console.log("Congratulations Player One, you're the Champion!");
+                } else if (playerTwoScore > playerOneScore) {
+                    console.log("Congratulations Player Two, you're the Champion!");
+                } else {
+                    console.log("Wow!  It's a tie!  Better play again!");
+                }
+            }
 
         }
 
