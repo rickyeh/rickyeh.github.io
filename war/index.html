@@ -47,10 +47,10 @@
             temp = array[counter];
             array[counter] = array[index];
             array[index] = temp;
-        }
+            }
 
-        return array;
-    }
+            return array;
+        }
 
         function draw() {
             console.log("Player One draws a card.");
@@ -96,6 +96,28 @@
 
         }
 
+        function reset(){
+
+            console.log("");
+            console.log("Starting New Game...");
+            console.log("Shuffling Cards...");
+            console.log("Reticulating Splines...");
+            console.log("");
+
+            // Shuffle the cards
+            shuffleCards(deckOne);
+            shuffleCards(deckTwo);
+
+            // Reset the array counter to go back to beginning of deck
+            deckOneCounter = 0;
+            deckTwoCounter = 0;
+
+            // Reset the overall scores
+            playerOneScore = 0;
+            playerTwoScore = 0;     
+        }
+
+
         </script>
 
         <style type="text/css">
@@ -107,6 +129,7 @@
         <h1>THIS IS (simple) WAR!!!</h1>
 
         <button onclick="draw()" id="draw" type="button">Draw!</button>
+        <button onclick="reset()" id="reset" type="button">New Game</button>
 
     </body>
 </html>
