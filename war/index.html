@@ -16,37 +16,24 @@
         var playerOneScore = 0;
         var playerTwoScore = 0;
 
-        // Populate the decks
-
-        for (var i = 1; i<=numCards; i++){
-            deckOne.push(i);
-        }
-
-        for (var i = 1; i<=numCards; i++){
-            deckTwo.push(i);
-        }
-
-        // Shuffle the cards
-        shuffleCards(deckOne);
-        shuffleCards(deckTwo);
-
+        // Set the current card to be played
         var playerOneCurrentCard = deckOne[deckOneCounter];
         var playerTwoCurrentCard = deckTwo[deckTwoCounter];
 
         // Shuffle function using the Fisher-Yates Method
         function shuffleCards(array) {
-            var counter = array.length;
-            var temp;
-            var index;
+                var counter = array.length;
+                var temp;
+                var index;
 
-            while (counter > 0) {
-            index = Math.floor(Math.random() * counter);
+                while (counter > 0) {
+                index = Math.floor(Math.random() * counter);
 
-            counter--;
+                counter--;
 
-            temp = array[counter];
-            array[counter] = array[index];
-            array[index] = temp;
+                temp = array[counter];
+                array[counter] = array[index];
+                array[index] = temp;
             }
 
             return array;
@@ -117,6 +104,19 @@
             playerTwoScore = 0;     
         }
 
+        // Populate the decks
+
+        for (var i=1; i<=numCards; i++){
+            deckOne.push(i);
+        }
+
+        for (var i=1; i<=numCards; i++){
+            deckTwo.push(i);
+        }
+
+        // Shuffle the cards
+        shuffleCards(deckOne);
+        shuffleCards(deckTwo);
 
         </script>
 
