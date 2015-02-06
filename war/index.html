@@ -17,8 +17,8 @@
         var playerTwoScore = 0;
 
         // Set the current card to be played
-        var playerOneCurrentCard = deckOne[deckOneCounter];
-        var playerTwoCurrentCard = deckTwo[deckTwoCounter];
+        var playerOneCurrentCard;
+        var playerTwoCurrentCard;
 
         // Shuffle function using the Fisher-Yates Method
         function shuffleCards(array) {
@@ -40,20 +40,29 @@
         }
 
         function draw() {
+            var output = document.getElementById("textDisplay");
+            var outputP1 = document.getElementById("playerOneDisplay");
+            var outputP2 = document.getElementById("playerTwoDisplay");
+
             console.log("Player One draws a card.");
             console.log(playerOneCurrentCard);
+            outputP1.innerHTML = playerOneCurrentCard;
 
             console.log("Player Two draws a card.");
             console.log(playerTwoCurrentCard);
+            outputP2.innerHTML = playerTwoCurrentCard;
 
             // Compare the Two Cards to Determine Winner
             if (playerOneCurrentCard > playerTwoCurrentCard) {
+                output.innerHTML = "Player 1 Wins!";
                 console.log("Player 1 Wins!");
                 playerOneScore++;
             } else if (playerTwoCurrentCard > playerOneCurrentCard) {
+                output.innerHTML = "Player 2 Wins!";
                 console.log("Player 2 Wins!");
                 playerTwoScore++;
             } else {
+                output.innerHTML = "It's a tie!";
                 console.log("It's a tie!");
             }
 
@@ -73,17 +82,22 @@
                 console.log("The game is over!  You're out of cards!");
 
                 if (playerOneScore > playerTwoScore) {
+                    alert("Congratulations Player One, you're the Champion!");
                     console.log("Congratulations Player One, you're the Champion!");
                 } else if (playerTwoScore > playerOneScore) {
                     console.log("Congratulations Player Two, you're the Champion!");
+                    alert("Congratulations Player Two, you're the Champion!");
                 } else {
                     console.log("Wow!  It's a tie!  Better play again!");
+                    alert("Wow! It's a tie!  Better play again!");
                 }
             }
-
         }
 
         function reset(){
+
+            var output = document.getElementById("textDisplay");
+            output.innerHTML = "Starting New Game...<br>Shuffling Cards...<br>Reticulating Splines...";
 
             console.log("");
             console.log("Starting New Game...");
@@ -118,18 +132,69 @@
         shuffleCards(deckOne);
         shuffleCards(deckTwo);
 
+        // Assign First Card on the deck
+        playerOneCurrentCard = deckOne[deckOneCounter];
+        playerTwoCurrentCard = deckTwo[deckTwoCounter];
+
         </script>
 
         <style type="text/css">
+            body {
+                font-family: Arial;
+                background-color: #7EC0EE;
+            }
+
+
+            #playerOneDisplay {
+                position: fixed;
+                left: 100px;
+                text-align: center;
+                font-size: 100px;
+                border: 1px solid red;
+                width: 500px;
+                height: 100px;
+            }
+
+           #playerTwoDisplay {
+                position: fixed;
+                left: 600px;
+                text-align: center;
+                font-size: 100px;
+                border: 1px solid red;
+                width: 500px;
+                height: 100px;
+            }
+
+            #textDisplay {
+                position: fixed;
+                left: 100px;
+                top: 200px;
+                border: 1px solid red;
+                width: 1000px;
+                text-align: left;
+            }
+
+            .buttons {
+                position: relative;
+                top: 200px;
+                left: 100px;
+                width: 300px;
+                height: 50px;
+                font-size: 20px;
+            }
         </style>
 
     </head>
 
     <body>
-        <h1>THIS IS (simple) WAR!!!</h1>
+        <h1 style="text-align:center">THIS IS (simple) WAR!!!</h1>
 
-        <button onclick="draw()" id="draw" type="button">Draw!</button>
-        <button onclick="reset()" id="reset" type="button">New Game</button>
+        <div id="playerOneDisplay">0</div>
+        <div id="playerTwoDisplay">0</div>
+        <div id="textDisplay">Hello.  Press Draw to Begin!</div>
+
+        <button class="buttons" onclick="draw()" id="draw" type="button">Draw!</button>
+        <button class="buttons" onclick="reset()" id="reset" type="button">New Game</button>
 
     </body>
 </html>
