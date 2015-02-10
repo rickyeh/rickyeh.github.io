@@ -40,6 +40,7 @@
         }
 
         function draw() {
+
             var output = document.getElementById("textDisplay");
             var outputP1 = document.getElementById("playerOneDisplay");
             var outputP2 = document.getElementById("playerTwoDisplay");
@@ -89,12 +90,15 @@
                 if (playerOneScore > playerTwoScore) {
                     alert("Congratulations Player One, you're the Champion!");
                     console.log("Congratulations Player One, you're the Champion!");
+                    reset();
                 } else if (playerTwoScore > playerOneScore) {
                     console.log("Congratulations Player Two, you're the Champion!");
                     alert("Congratulations Player Two, you're the Champion!");
+                    reset();
                 } else {
                     console.log("Wow!  It's a tie!  Better play again!");
                     alert("Wow! It's a tie!  Better play again!");
+                    reset();
                 }
             }
         }
@@ -102,6 +106,9 @@
         function reset(){
 
             var output = document.getElementById("textDisplay");
+            var outputP1Score = document.getElementById("playerOneScore");
+            var outputP2Score = document.getElementById("playerTwoScore");
+
             output.innerHTML = "Starting New Game...<br>Shuffling Cards...<br>Reticulating Splines...";
 
             console.log("");
@@ -118,9 +125,16 @@
             deckOneCounter = 0;
             deckTwoCounter = 0;
 
+            // Reassign first card
+            playerOneCurrentCard = deckOne[deckOneCounter];
+            playerTwoCurrentCard = deckTwo[deckTwoCounter];
+
             // Reset the overall scores
             playerOneScore = 0;
-            playerTwoScore = 0;     
+            playerTwoScore = 0;
+
+            outputP1Score.innerHTML = "Score: " + playerOneScore;
+            outputP2Score.innerHTML = "Score: " + playerTwoScore;
         }
 
         // Populate the decks
@@ -152,12 +166,14 @@
 
             #cardDisplayWrapper {
                 position: relative;
+                margin-left: auto;
+                margin-right: auto;
+                width: 600px;
                 height: 100px;
-
             }
             #playerOneDisplay {
                 position: absolute;
-                left: 100px;
+                left: 10px;
                 text-align: center;
                 font-size: 100px;
                 width: 300px;
@@ -166,7 +182,7 @@
 
            #playerTwoDisplay {
                 position: absolute;
-                right: 100px;
+                right: 10px;
                 text-align: center;
                 font-size: 100px;
                 width: 300px;
@@ -175,12 +191,15 @@
 
             #scoreDisplayWrapper {
                 position: relative;
+                margin-left: auto;
+                margin-right: auto;
+                width: 600px;
                 height: 30px;
             }
 
             #playerOneScore {
                 position: absolute;
-                left: 100px;
+                left: 10px;
                 text-align: center;
                 font-size: 30px;
                 width: 300px;
@@ -189,7 +208,7 @@
 
             #playerTwoScore {
                 position: absolute;
-                right: 100px;
+                right: 10px;
                 text-align: center;
                 font-size: 30px;
                 width: 300px;
@@ -205,24 +224,27 @@
             }
 
             button {
-                position: static;
                 width: 175px;
                 height: 40px;
                 font-size: 20px;
             }
 
             #buttonDiv {
+                position: relative;
+                margin-left: auto;
+                margin-right: auto;
+                width: 400px;
                 height: 40px;
             }
 
             #drawButton {
                 position: absolute;
-                left: 100px;
+                left: 10px;
             }
 
             #resetButton {
                 position: absolute;
-                right: 100px;
+                right: 10px;
             }
 
         </style>
@@ -230,7 +252,7 @@
     </head>
 
     <body>
-        <h1 style="text-align:center">THIS IS (simple) WAR!!!</h1>
+        <h1 style="text-align:center">THIS IS WAR!!!</h1>
 
         <div id="cardDisplayWrapper">
             <div id="playerOneDisplay">0</div>
