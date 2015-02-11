@@ -51,6 +51,11 @@
             var outputP1Score = document.getElementById("playerOneScore");
             var outputP2Score = document.getElementById("playerTwoScore");
 
+            // If game is over, cards are undefined and needs to be reset.
+            if (playerOneCurrentCard === undefined) {
+                reset();
+            }
+
             console.log("Player One draws a card.");
             console.log(playerOneCurrentCard);
             outputP1.innerHTML = playerOneCurrentCard;
@@ -94,15 +99,12 @@
                 if (playerOneScore > playerTwoScore) {
                     alert("Congratulations Player One, you're the Champion!");
                     console.log("Congratulations Player One, you're the Champion!");
-                    reset();
                 } else if (playerTwoScore > playerOneScore) {
                     console.log("Congratulations Player Two, you're the Champion!");
                     alert("Congratulations Player Two, you're the Champion!");
-                    reset();
                 } else {
                     console.log("Wow!  It's a tie!  Better play again!");
                     alert("Wow! It's a tie!  Better play again!");
-                    reset();
                 }
             }
         }
@@ -110,10 +112,15 @@
         function reset(){
 
             var output = document.getElementById("textDisplay");
+            var outputP1 = document.getElementById("playerOneDisplay");
+            var outputP2 = document.getElementById("playerTwoDisplay");
             var outputP1Score = document.getElementById("playerOneScore");
             var outputP2Score = document.getElementById("playerTwoScore");
 
             output.innerHTML = "Starting New Game...<br>Shuffling Cards...<br>Reticulating Splines...";
+
+            outputP1.innerHTML = "";
+            outputP2.innerHTML = "";
 
             console.log("");
             console.log("Starting New Game...");
@@ -164,9 +171,9 @@
         <style type="text/css">
             body {
                 font-family: Arial;
-                background-color: #7EC0EE;
+                background-color: #348C3E;
                 background-image: url('images/green-felt.jpg');
-                background-size: 100% 100%;
+                background-size: cover;
                 background-repeat: no-repeat;
             }
 
@@ -262,8 +269,8 @@
         <h1 style="text-align:center">THIS IS WAR!!!</h1>
 
         <div id="cardDisplayWrapper">
-            <div id="playerOneDisplay">0</div>
-            <div id="playerTwoDisplay">0</div>
+            <div id="playerOneDisplay"></div>
+            <div id="playerTwoDisplay"></div>
         </div>
 
         <div id="scoreDisplayWrapper">
