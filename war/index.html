@@ -26,11 +26,11 @@
 
         // Shuffle function using the Fisher-Yates Method
         function shuffleCards(array) {
-                var counter = array.length;
-                var temp;
-                var index;
+            var counter = array.length;
+            var temp;
+            var index;
 
-                while (counter > 0) {
+            while (counter > 0) {
                 index = Math.floor(Math.random() * counter);
 
                 counter--;
@@ -39,7 +39,6 @@
                 array[counter] = array[index];
                 array[index] = temp;
             }
-
             return array;
         }
 
@@ -58,20 +57,20 @@
 
             console.log("Player One draws a card.");
             console.log(playerOneCurrentCard);
-            outputP1.innerHTML = playerOneCurrentCard;
+            outputP1.innerHTML = playerOneCurrentCard.value;
 
             console.log("Player Two draws a card.");
             console.log(playerTwoCurrentCard);
-            outputP2.innerHTML = playerTwoCurrentCard;
+            outputP2.innerHTML = playerTwoCurrentCard.value;
 
             // Compare the Two Cards to Determine Winner
-            if (playerOneCurrentCard > playerTwoCurrentCard) {
+            if (playerOneCurrentCard.value > playerTwoCurrentCard.value) {
                 output.innerHTML = "Player 1 Wins!";
                 console.log("Player 1 Wins!");
                 playerOneScore++;
                 outputP1Score.innerHTML = "Score: " + playerOneScore;
 
-            } else if (playerTwoCurrentCard > playerOneCurrentCard) {
+            } else if (playerTwoCurrentCard.value > playerOneCurrentCard.value) {
                 output.innerHTML = "Player 2 Wins!";
                 console.log("Player 2 Wins!");
                 playerTwoScore++;
@@ -109,6 +108,7 @@
             }
         }
 
+        // Function to reset the game to initial state.
         function reset(){
 
             var output = document.getElementById("textDisplay");
@@ -148,23 +148,48 @@
             outputP2Score.innerHTML = "Score: " + playerTwoScore;
         }
 
-        // Populate the decks
+        // Function to populate the deck, shuffle the cards, and assign first card
+        function deckBuilder() {
+            for (var i=1; i<=numCards; i++){
+                deckOne.push(i);
+            }
 
-        for (var i=1; i<=numCards; i++){
-            deckOne.push(i);
+            for (var i=1; i<=numCards; i++){
+                deckTwo.push(i);
+            }
+
+            // Shuffle the cards
+            shuffleCards(deckOne);
+            shuffleCards(deckTwo);
+
+            // Assign First Card on the deck
+            playerOneCurrentCard = deckOne[deckOneCounter];
+            playerTwoCurrentCard = deckTwo[deckTwoCounter];
         }
 
-        for (var i=1; i<=numCards; i++){
-            deckTwo.push(i);
+        // Function to build deck of card objects
+
+        function deckBuilder(){
+            var card = {};
+
+            for(var i=1; i<=numCards; i++){
+                deckOne.push(card = {value:i});
+            }
+
+            for(var i=1; i<=numCards; i++){
+                deckTwo.push(card = {value:i});
+            }
+
+            // Shuffle the cards
+            shuffleCards(deckOne);
+            shuffleCards(deckTwo);
+
+            // Assign First Card on the deck
+            playerOneCurrentCard = deckOne[deckOneCounter];
+            playerTwoCurrentCard = deckTwo[deckTwoCounter];
         }
 
-        // Shuffle the cards
-        shuffleCards(deckOne);
-        shuffleCards(deckTwo);
-
-        // Assign First Card on the deck
-        playerOneCurrentCard = deckOne[deckOneCounter];
-        playerTwoCurrentCard = deckTwo[deckTwoCounter];
+        deckBuilder();
 
         </script>
 
