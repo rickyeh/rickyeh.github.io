@@ -82,6 +82,7 @@
 
             // Print the current Score
             console.log("The current score is: Player One: " + playerOneScore + " -  Player Two: " + playerTwoScore);
+            console.log("");
 
             // Increment the counters of each deck
             deckOneCounter++;
@@ -148,36 +149,22 @@
             outputP2Score.innerHTML = "Score: " + playerTwoScore;
         }
 
-        // Function to populate the deck, shuffle the cards, and assign first card
-        function deckBuilder() {
-            for (var i=1; i<=numCards; i++){
-                deckOne.push(i);
-            }
-
-            for (var i=1; i<=numCards; i++){
-                deckTwo.push(i);
-            }
-
-            // Shuffle the cards
-            shuffleCards(deckOne);
-            shuffleCards(deckTwo);
-
-            // Assign First Card on the deck
-            playerOneCurrentCard = deckOne[deckOneCounter];
-            playerTwoCurrentCard = deckTwo[deckTwoCounter];
-        }
-
-        // Function to build deck of card objects
+        // Function to build a deck of card objects
 
         function deckBuilder(){
             var card = {};
 
-            for(var i=1; i<=numCards; i++){
-                deckOne.push(card = {value:i});
+            // Initialize deck with double nested for loops.  
+            for (var i=0; i<=3; i++){
+                for(var j=2; j<=14; j++){
+                    deckOne.push(card = {value:j, suit: i});
+                 }
             }
 
-            for(var i=1; i<=numCards; i++){
-                deckTwo.push(card = {value:i});
+            for (var i=0; i<=3; i++){
+                for(var j=2; j<=14; j++){
+                    deckTwo.push(card = {value:j, suit: i});
+                 }
             }
 
             // Shuffle the cards
