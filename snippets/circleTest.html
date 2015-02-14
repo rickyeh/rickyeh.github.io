@@ -7,8 +7,12 @@
         <style type="text/css">
 
         #myCanvas{
-            width: 800px;
-            height: 400px;
+            position: absolute;
+            border: 2px solid red;
+            left: 0;
+            right: 0;
+            margin-left: auto;
+            margin-right: auto;
         }
         </style>
 
@@ -17,42 +21,70 @@
 
     <body>
 
-        <canvas id="myCanvas"></canvas>
+        <canvas id="myCanvas" width='500px' height='500px'></canvas>
 
         <script type="text/javascript">
 
         var canvas = document.getElementById('myCanvas');
-        var context = canvas.getContext('2d');
+        var ctx = canvas.getContext('2d');
 
         var centerX = canvas.width / 2;
         var centerY = canvas.height / 2;
-        var radius = 70;
+        var radius;
 
-        context.beginPath();
-        context.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
-        context.fillStyle = 'green';
-        context.fill();
-        context.lineWidth = 2;
-        context.strokeStyle = '#black';
-        context.stroke();
+        // Function to draw a circle with a fill color.
+        // Parameters:
+        //     radius - desired radius of the circle
+        //     color - color that the circle is to be filled with
 
-        context.beginPath();
-        context.arc(centerX, centerY, radius - 10, 0, 2 * Math.PI, false);
-        context.lineWidth = 1;
-        context.strokeStyle = '#black';
-        context.stroke();
+        function drawCircle(radius, color){
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
+            ctx.fillStyle = color;
+            ctx.fill();
+            ctx.lineWidth = 2;
+            ctx.strokeStyle = 'black';
+            ctx.stroke();
+        }
 
-        context.beginPath();
-        context.moveTo(centerX - radius, centerY);
-        context.lineTo(centerX + radius, centerY);
-        context.lineWidth = 1;
-        context.stroke();
+        // Function to draw lines from the center of the canvas.
+        // Parameters: 
+        //     radius - radius of the circle
+        //     radians - angle in radians for the desired end point of the line
 
-        context.beginPath();
-        context.moveTo(centerX, centerY - radius);
-        context.lineTo(centerX, centerY + radius);
-        context.lineWidth = 1;
-        context.stroke();
+        function drawLine(radius, radians){
+
+            var x = centerX + radius * Math.cos(radians);
+            var y = centerY + radius * Math.sin(radians);
+
+            ctx.beginPath();
+            ctx.moveTo(centerX, centerY);
+            ctx.lineTo(x,y);
+            ctx.lineWidth = 1;
+            ctx.strokeStyle = 'white';
+            ctx.stroke();
+        }
+
+        function drawDot(){
+
+        }
+
+        // Draw Roulette Wheel
+        drawCircle(200, 'black');
+        drawCircle(180, 'white');
+        drawCircle(175, 'red');
+        drawCircle(150, 'white');
+        drawCircle(145, 'black');
+
+        // For loop to draw the lines
+        for(var i = 1; i <= 38; i++){
+             drawLine(200, (i * 2 * Math.PI)/38);
+        }
+
+        // Draw remaining inner circles over lines
+        drawCircle(125, 'white');
+        drawCircle(120, 'green');
+        drawCircle(10, 'yellow');
 
 
         </script>
