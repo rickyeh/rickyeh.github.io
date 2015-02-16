@@ -37,7 +37,7 @@
         //     radius - desired radius of the circle
         //     color - color that the circle is to be filled with
 
-        function drawCircle(radius, color){
+        function drawCircle(radius, color) {
             ctx.beginPath();
             ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
             ctx.fillStyle = color;
@@ -52,7 +52,7 @@
         //     radius - radius of the circle
         //     radians - angle in radians for the desired end point of the line
 
-        function drawLine(radius, radians){
+        function drawLine(radius, radians) {
 
             var x = centerX + radius * Math.cos(radians);
             var y = centerY + radius * Math.sin(radians);
@@ -65,7 +65,14 @@
             ctx.stroke();
         }
 
-        function drawDot(){
+        function drawHandle(radians){
+            var radius = 60;
+            ctx.lineWidth = 7;
+            ctx.strokeStyle = 'white';
+            ctx.stroke();
+        }
+
+        function drawDot() {
 
         }
 
@@ -84,9 +91,13 @@
         // Draw remaining inner circles over lines
         drawCircle(125, 'white');
         drawCircle(120, 'green');
+
+        drawHandle(2*Math.PI);
+        drawHandle(Math.PI);
+        drawHandle(Math.PI/2);
+        drawHandle(-Math.PI/2);
+
         drawCircle(10, 'yellow');
-
-
         </script>
 
     </body>
