@@ -1,0 +1,15 @@
+
+html {
+    background-color: #348C3E;
+    background: url('images/green-felt.jpg');
+    background-size: : cover;
+}
+
+body {
+    font-family: Arial;
+}
+
+div {
+    height: 100px;
+    border: 1px solid red;
+}
