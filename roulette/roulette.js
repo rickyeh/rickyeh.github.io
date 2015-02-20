@@ -24,7 +24,7 @@ var player = {
     },
     // Method : Clears bets and resets bet amount to zero.
     clearBet: function() {
-        player.betAmt = 0;
+        player.betAmt = 1;
         player.betNumber = null;
     }
 };
@@ -122,20 +122,15 @@ var table = {
 function newGame() {
     console.log('New game is starting...');
     player.bankroll = 100;
-    player.betAmt = 0;
+    player.betAmt = 1;
 }
 // MAIN PROGRAM STARTS HERE
 newGame();
 
-// Player makes bets, subtract amount of money made
-player.bet(player.betAmt, player.betNumber);
-
 console.log('Make bet with console command: player.bet(Amount,Number)');
 
-// Player hits spin button, table spins
-// Randomize the current number to be one of the possible numbers.
-// If player's bet number matches the currentNum, pay out the player.
-// if not, clear the board and start again
+
+// HTML CANVAS CODE FOR ROULETTE WHEEL STARTS HERE
 
         var canvas = document.getElementById('myCanvas');
         var ctx = canvas.getContext('2d');
@@ -179,14 +174,13 @@ console.log('Make bet with console command: player.bet(Amount,Number)');
 
         function drawHandle(radians) {
             radius = 60;
-            
+
             var x = centerX + radius * Math.cos(radians);
             var y = centerY + radius * Math.sin(radians);
 
             ctx.beginPath();
             ctx.moveTo(centerX, centerY);
             ctx.lineTo(x, y);
-
 
             ctx.lineWidth = 7;
             ctx.strokeStyle = 'white';

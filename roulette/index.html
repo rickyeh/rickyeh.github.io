@@ -10,15 +10,25 @@
     <body>
         <h1 style="text-align:center">Casino Roulette</h1>
 
-        <div id="topWrapper" style="background:blue; width:100%; height:400px">
+        <div id="topWrapper">
             <canvas id="myCanvas" width='400px' height='400px'></canvas>
-            <div style="background:green; width:100px; height:100px; float:right"></div>
+            <div id="numberWrapper">
+               <!--  <div class="betNumber"></div> -->
+            </div>
+            <div id="evenPayoutWrapper">
+                <div class="betEvenPayout" id="even">Even</div>
+                <div class="betEvenPayout" id="red" onclick="player.bet(player.betAmt,'Red')">Red</div>
+                <div class="betEvenPayout" id="black" onclick="player.bet(player.betAmt,'Black')">Black</div>
+                <div class="betEvenPayout" id="odd">Odd</div>
+            </div>
+            <div id="infoWrapper"></div>
+            <div id="buttonWrapper">
+                <button onclick="table.spin()" id="drawButton" type="button">Spin!</button>
+                <button onclick="newGame()" id="resetButton" type="button">New Game</button>
+            </div>
         </div>
 
-        <div id="buttonDiv">
-            <button onclick="table.spin()" id="drawButton" type="button">Spin!</button>
-            <button onclick="newGame()" id="resetButton" type="button">New Game</button>
-        </div>
+        <div id="textDisplay"></div>
         <script src="roulette.js"></script>
     </body>
 </html>
