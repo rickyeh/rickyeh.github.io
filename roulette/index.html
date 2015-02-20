@@ -4,22 +4,21 @@
         <title>Casino Roulette</title>
 
         <link rel="stylesheet" type="text/css" href="roulette.css">
-        <script src="roulette.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     </head>
 
     <body>
         <h1 style="text-align:center">Casino Roulette</h1>
 
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
+        <div id="topWrapper" style="background:blue; width:100%; height:400px">
+            <canvas id="myCanvas" width='400px' height='400px'></canvas>
+            <div style="background:green; width:100px; height:100px; float:right"></div>
+        </div>
+
         <div id="buttonDiv">
             <button onclick="table.spin()" id="drawButton" type="button">Spin!</button>
             <button onclick="newGame()" id="resetButton" type="button">New Game</button>
         </div>
-
+        <script src="roulette.js"></script>
     </body>
 </html>

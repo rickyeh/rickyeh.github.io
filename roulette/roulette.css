@@ -19,3 +19,13 @@ button {
     height: 40px;
     font-size: 20px;
 }
+
+#myCanvas{
+    position: absolute;
+    border: 2px solid yellow;
+    left: 0;
+    right: 0;
+/*    margin-left: auto;*/
+    float: left;
+    margin-right: auto;
+}

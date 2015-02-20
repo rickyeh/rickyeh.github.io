@@ -80,7 +80,7 @@ var table = {
 
     // Method : Generates a random number from the array of possible numbers and calls payWinner()
     spin: function() {
-        if (player.betNumber == null) {
+        if (player.betNumber === null) {
             console.log('Please make a bet first before spinning!');
             return;
         }
@@ -136,3 +136,82 @@ console.log('Make bet with console command: player.bet(Amount,Number)');
 // Randomize the current number to be one of the possible numbers.
 // If player's bet number matches the currentNum, pay out the player.
 // if not, clear the board and start again
+
+        var canvas = document.getElementById('myCanvas');
+        var ctx = canvas.getContext('2d');
+
+        var centerX = canvas.width / 2;
+        var centerY = canvas.height / 2;
+        var radius;
+
+        // Function to draw a circle with a fill color.
+        // Parameters:
+        //     radius - desired radius of the circle
+        //     color - color that the circle is to be filled with
+
+        function drawCircle(radius, color) {
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
+            ctx.fillStyle = color;
+            ctx.fill();
+            ctx.lineWidth = 2;
+            ctx.strokeStyle = 'black';
+            ctx.stroke();
+        }
+
+        // Function to draw lines from the center of the canvas.
+        // Parameters: 
+        //     radius - radius of the circle
+        //     radians - angle in radians for the desired end point of the line
+
+        function drawLine(radius, radians) {
+
+            var x = centerX + radius * Math.cos(radians);
+            var y = centerY + radius * Math.sin(radians);
+
+            ctx.beginPath();
+            ctx.moveTo(centerX, centerY);
+            ctx.lineTo(x, y);
+            ctx.lineWidth = 1;
+            ctx.strokeStyle = 'white';
+            ctx.stroke();
+        }
+
+        function drawHandle(radians) {
+            radius = 60;
+            
+            var x = centerX + radius * Math.cos(radians);
+            var y = centerY + radius * Math.sin(radians);
+
+            ctx.beginPath();
+            ctx.moveTo(centerX, centerY);
+            ctx.lineTo(x, y);
+
+
+            ctx.lineWidth = 7;
+            ctx.strokeStyle = 'white';
+            ctx.stroke();
+        }
+
+        // Draw Roulette Wheel
+        drawCircle(200, 'black');
+        drawCircle(180, 'white');
+        drawCircle(175, 'red');
+        drawCircle(150, 'white');
+        drawCircle(145, 'black');
+
+        // For loop to draw the lines
+        for (var i = 1; i <= 38; i++) {
+            drawLine(200, (i * 2 * Math.PI) / 38);
+        }
+
+        // Draw remaining inner circles over lines
+        drawCircle(125, 'white');
+        drawCircle(120, 'green');
+
+        drawHandle(2 * Math.PI);
+        drawHandle(Math.PI);
+        drawHandle(Math.PI / 2);
+        drawHandle(-Math.PI / 2);
+
+        drawCircle(10, 'yellow');
