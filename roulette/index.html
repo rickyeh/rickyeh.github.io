@@ -16,10 +16,10 @@
                <!--  <div class="betNumber"></div> -->
             </div>
             <div id="evenPayoutWrapper">
-                <div class="betEvenPayout" id="even">Even</div>
+                <div class="betEvenPayout" id="even" onclick="player.bet(player.betAmt,'Even')">Even</div>
                 <div class="betEvenPayout" id="red" onclick="player.bet(player.betAmt,'Red')">Red</div>
                 <div class="betEvenPayout" id="black" onclick="player.bet(player.betAmt,'Black')">Black</div>
-                <div class="betEvenPayout" id="odd">Odd</div>
+                <div class="betEvenPayout" id="odd" onclick="player.bet(player.betAmt,'Odd')">Odd</div>
             </div>
             <div id="infoWrapper"></div>
             <div id="buttonWrapper">
@@ -28,7 +28,7 @@
             </div>
         </div>
 
-        <div id="textDisplay"></div>
+        <div id="textDisplay">Please open the console :)</div>
         <script src="roulette.js"></script>
     </body>
 </html>

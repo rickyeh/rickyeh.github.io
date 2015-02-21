@@ -110,6 +110,14 @@ var table = {
             console.log('Congratulations, you won!');
             this.payoutAmt = betAmt * 2;
             player.bankroll = player.bankroll + this.payoutAmt;
+        } else if (player.betNumber === 'Even' && this.currentNum.value%2 === 0 && this.currentNum.color != 'Green') { // Even bets win 2x except 0's
+            console.log('Congratulations, you won!');
+            this.payoutAmt = betAmt * 2;
+            player.bankroll = player.bankroll + this.payoutAmt;
+        } else if (player.betNumber === 'Odd' && this.currentNum.value%2 === 1) { // Odd bets win 2x
+            console.log('Congratulations, you won!');
+            this.payoutAmt = betAmt * 2;
+            player.bankroll = player.bankroll + this.payoutAmt;
         } else { // Nothing matches, player loses
             console.log('Sorry, try again!');
         }
