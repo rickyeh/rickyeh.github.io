@@ -16,17 +16,16 @@ var player = {
     // Params:
     //      amount - amount of chips that is bet
     //      number - the number or color that is bet
-    bet: function(amount, number) {
-        player.bankroll = player.bankroll - amount;
-        player.betAmt = amount;
-        player.betNumber = number;
+    bet: function(number) {
+        this.bankroll = this.bankroll - this.betAmt;
+        this.betNumber = number;
 
-        console.log('I am betting ' + amount + ' chips on ' + number + '.');
+        console.log('I am betting ' + this.betAmt + ' chips on ' + number + '.');
     },
     // Method : Clears bets and resets bet amount to zero.
     clearBet: function() {
-        player.betAmt = 1;
-        player.betNumber = null;
+        this.betAmt = 1;
+        this.betNumber = null;
     }
 };
 // Object : Represents the table in the roulette game
@@ -91,7 +90,7 @@ var table = {
         console.log('The winning number is: ' + this.currentNum.value + ' ' + this.currentNum.color);
 
         this.payWinner(player.betAmt);
-        player.clearBet();
+        this.clearBet();
     },
 
     // Method: Calculates any winnings based on amount bet by comparing numbers and bets
@@ -217,10 +216,10 @@ function drawCanvas() {
 
 // CLICK FUNCTIONS FOR THE BETTINGS
 
-$('#even').click(function(){ player.bet(player.betAmt,'Even') });
-$('#red').click(function(){ player.bet(player.betAmt,'Red') });
-$('#black').click(function(){ player.bet(player.betAmt,'Black') });
-$('#odd').click(function(){ player.bet(player.betAmt,'Odd') });
+$('#even').click(function(){ player.bet('Even')});
+$('#red').click(function(){ player.bet('Red')});
+$('#black').click(function(){ player.bet('Black')});
+$('#odd').click(function(){ player.bet('Odd')});
 
 // MAIN PROGRAM STARTS HERE
 newGame();

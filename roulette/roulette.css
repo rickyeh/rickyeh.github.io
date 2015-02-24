@@ -11,7 +11,6 @@ body {
 
 div {
     height: 100px;
-    /*background: green;*/
 }
 
 button {
@@ -22,7 +21,6 @@ button {
 }
 
 .betNumber {
-/*    position: absolute;*/
     float: left;
     height: 40px;
     width: 40px;
@@ -51,7 +49,6 @@ button {
 
 #topWrapper {
     position: relative;
-/*    background: blue;*/
     width: 100%;
     height: 400px;
 }
@@ -82,11 +79,11 @@ button {
 
 #infoWrapper{
     position: absolute;
-    background: gray;
     height: 100px;
     width:  260px;
     top: 210px;
     right: 285px;
+    box-shadow: 0px 0px 0px 2px white inset;
 }
 
 #buttonWrapper{
@@ -99,6 +96,7 @@ button {
 }
 
 #textDisplay {
+    top: 100px;
     background-color: white;
     height: 150px;
 }
