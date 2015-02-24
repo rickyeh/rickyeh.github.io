@@ -21,6 +21,7 @@ var player = {
         this.betNumber = number;
 
         console.log('I am betting ' + this.betAmt + ' chips on ' + number + '.');
+        table.spin();  // FOR TESTING PURPOSES.  REMOVE LATER
     },
     // Method : Clears bets and resets bet amount to zero.
     clearBet: function() {
@@ -90,7 +91,7 @@ var table = {
         console.log('The winning number is: ' + this.currentNum.value + ' ' + this.currentNum.color);
 
         this.payWinner(player.betAmt);
-        this.clearBet();
+        player.clearBet();
     },
 
     // Method: Calculates any winnings based on amount bet by comparing numbers and bets
@@ -216,10 +217,132 @@ function drawCanvas() {
 
 // CLICK FUNCTIONS FOR THE BETTINGS
 
-$('#even').click(function(){ player.bet('Even')});
-$('#red').click(function(){ player.bet('Red')});
-$('#black').click(function(){ player.bet('Black')});
-$('#odd').click(function(){ player.bet('Odd')});
+$('#even').click(function() {
+    player.bet('Even');
+});
+$('#red').click(function() {
+    player.bet('Red');
+});
+$('#black').click(function() {
+    player.bet('Black');
+});
+$('#odd').click(function() {
+    player.bet('Odd');
+});
+$('#zero').click(function() {
+    player.bet('0');
+});
+$('#doubleZero').click(function() {
+    player.bet('00');
+});
+$('#one').click(function() {
+    player.bet('1');
+});
+$('#two').click(function() {
+    player.bet('2');
+});
+$('#three').click(function() {
+    player.bet('3');
+});
+$('#four').click(function() {
+    player.bet('4');
+});
+$('#five').click(function() {
+    player.bet('5');
+});
+$('#six').click(function() {
+    player.bet('6');
+});
+$('#seven').click(function() {
+    player.bet('7');
+});
+$('#eight').click(function() {
+    player.bet('8');
+});
+$('#nine').click(function() {
+    player.bet('9');
+});
+$('#ten').click(function() {
+    player.bet('10');
+});
+$('#eleven').click(function() {
+    player.bet('11');
+});
+$('#twelve').click(function() {
+    player.bet('12');
+});
+$('#thirteen').click(function() {
+    player.bet('13');
+});
+$('#fourteen').click(function() {
+    player.bet('14');
+});
+$('#fifteen').click(function() {
+    player.bet('15');
+});
+$('#sixteen').click(function() {
+    player.bet('16');
+});
+$('#seventeen').click(function() {
+    player.bet('17');
+});
+$('#eighteen').click(function() {
+    player.bet('18');
+});
+$('#nineteen').click(function() {
+    player.bet('19');
+});
+$('#twenty').click(function() {
+    player.bet('20');
+});
+$('#twentyone').click(function() {
+    player.bet('21');
+});
+$('#twentytwo').click(function() {
+    player.bet('22');
+});
+$('#twentythree').click(function() {
+    player.bet('23');
+});
+$('#twentyfour').click(function() {
+    player.bet('24');
+});
+$('#twentyfive').click(function() {
+    player.bet('25');
+});
+$('#twentysix').click(function() {
+    player.bet('26');
+});
+$('#twentyseven').click(function() {
+    player.bet('27');
+});
+$('#twentyeight').click(function() {
+    player.bet('28');
+});
+$('#twentynine').click(function() {
+    player.bet('29');
+});
+$('#thirty').click(function() {
+    player.bet('30');
+});
+$('#thirtyone').click(function() {
+    player.bet('31');
+});
+$('#thirtytwo').click(function() {
+    player.bet('32');
+});
+$('#thirtythree').click(function() {
+    player.bet('33');
+});
+$('#thirtyfour').click(function() {
+    player.bet('34');
+});
+$('#thirtyfive').click(function() {
+    player.bet('35');
+});
+$('#thirtysix').click(function() {
+    player.bet('36');
+});
 
 // MAIN PROGRAM STARTS HERE
 newGame();
