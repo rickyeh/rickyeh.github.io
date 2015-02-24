@@ -2,24 +2,61 @@
 <html>
     <head>
         <title>Casino Roulette</title>
-
         <link rel="stylesheet" type="text/css" href="roulette.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     </head>
 
     <body>
         <h1 style="text-align:center">Casino Roulette</h1>
 
         <div id="topWrapper">
-            <canvas id="myCanvas" width='400px' height='400px'></canvas>
+            <canvas id="myCanvas" width='400' height='400'></canvas>
             <div id="numberWrapper">
-               <!--  <div class="betNumber"></div> -->
+                <div id="zerosWrapper">
+                    <div class="betGreen" id="zero">0</div>
+                    <div class="betGreen" id="doubleZero">00</div>
+                </div>
+                <div class="betNumber" id="three">3</div>
+                <div class="betNumber" id="six">6</div>
+                <div class="betNumber" id="nine">9</div>
+                <div class="betNumber" id="twelve">12</div>
+                <div class="betNumber" id="fifteen">15</div>
+                <div class="betNumber" id="eighteen">18</div>
+                <div class="betNumber" id="twentyone">21</div>
+                <div class="betNumber" id="twentyfour">24</div>
+                <div class="betNumber" id="twentyseven">27</div>
+                <div class="betNumber" id="thirty">30</div>
+                <div class="betNumber" id="thirtythree">33</div>
+                <div class="betNumber" id="thirtysix">36</div>
+                <div class="betNumber" id="two">2</div>
+                <div class="betNumber" id="five">5</div>
+                <div class="betNumber" id="eight">8</div>
+                <div class="betNumber" id="eleven">11</div>
+                <div class="betNumber" id="fourteen">14</div>
+                <div class="betNumber" id="seventeen">17</div>
+                <div class="betNumber" id="twenty">20</div>
+                <div class="betNumber" id="twentythree">23</div>
+                <div class="betNumber" id="twentysix">26</div>
+                <div class="betNumber" id="twentynine">29</div>
+                <div class="betNumber" id="thirtytwo">32</div>
+                <div class="betNumber" id="thirtyfive">35</div>
+                <div class="betNumber" id="one">1</div>
+                <div class="betNumber" id="four">4</div>
+                <div class="betNumber" id="seven">7</div>
+                <div class="betNumber" id="ten">10</div>
+                <div class="betNumber" id="thirteen">13</div>
+                <div class="betNumber" id="sixteen">16</div>
+                <div class="betNumber" id="nineteen">19</div>
+                <div class="betNumber" id="twentytwo">22</div>
+                <div class="betNumber" id="twentyfive">25</div>
+                <div class="betNumber" id="twentyeight">28</div>
+                <div class="betNumber" id="thirtyone">31</div>
+                <div class="betNumber" id="thirtyfour">34</div>
             </div>
             <div id="evenPayoutWrapper">
-                <div class="betEvenPayout" id="even" onclick="player.bet(player.betAmt,'Even')">Even</div>
-                <div class="betEvenPayout" id="red" onclick="player.bet(player.betAmt,'Red')">Red</div>
-                <div class="betEvenPayout" id="black" onclick="player.bet(player.betAmt,'Black')">Black</div>
-                <div class="betEvenPayout" id="odd" onclick="player.bet(player.betAmt,'Odd')">Odd</div>
+                <div class="betEvenPayout" id="even">Even</div>
+                <div class="betEvenPayout" id="red">Red</div>
+                <div class="betEvenPayout" id="black">Black</div>
+                <div class="betEvenPayout" id="odd">Odd</div>
             </div>
             <div id="infoWrapper"></div>
             <div id="buttonWrapper">
@@ -29,6 +66,8 @@
         </div>
 
         <div id="textDisplay">Please open the console :)</div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <script src="roulette.js"></script>
     </body>
 </html>

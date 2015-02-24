@@ -1,3 +1,4 @@
+
 // Object : Represents the player in the roulette game.
 // Properties :
 //     bankroll - How much money the player currently has.
@@ -132,14 +133,9 @@ function newGame() {
     player.bankroll = 100;
     player.betAmt = 1;
 }
-// MAIN PROGRAM STARTS HERE
-newGame();
-
-console.log('Make bet with console command: player.bet(Amount,Number)');
-
 
 // HTML CANVAS CODE FOR ROULETTE WHEEL STARTS HERE
-
+function drawCanvas() {
         var canvas = document.getElementById('myCanvas');
         var ctx = canvas.getContext('2d');
 
@@ -217,3 +213,18 @@ console.log('Make bet with console command: player.bet(Amount,Number)');
         drawHandle(-Math.PI / 2);
 
         drawCircle(10, 'yellow');
+}
+
+// CLICK FUNCTIONS FOR THE BETTINGS
+
+$('#even').click(function(){ player.bet(player.betAmt,'Even') });
+$('#red').click(function(){ player.bet(player.betAmt,'Red') });
+$('#black').click(function(){ player.bet(player.betAmt,'Black') });
+$('#odd').click(function(){ player.bet(player.betAmt,'Odd') });
+
+// MAIN PROGRAM STARTS HERE
+newGame();
+drawCanvas();
+
+console.log('Make bet with console command: player.bet(Amount,Number)');
+
