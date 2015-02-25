@@ -45,6 +45,16 @@ button {
     text-align: center;
     color: white;
     line-height: 60px;
+    height: 60px;
+    width: 40px;
+}
+
+.infoBox {
+    height: 50px;
+    box-shadow: 0px 0px 0px 2px white inset;
+    text-align: center;
+    color: white;
+    line-height: 50px;
 }
 
 #topWrapper {
@@ -55,8 +65,6 @@ button {
 
 #myCanvas {
     position: absolute;
-    left: 0;
-    right: 0;
     margin-right: auto;
 }
 
@@ -67,6 +75,7 @@ button {
     top: 50px;
     right: 25px;
     box-shadow: 0px 0px 0px 2px white inset;
+    background-color: rgba(0,0,0,0.3);
 }
 
 #evenPayoutWrapper {
@@ -75,6 +84,7 @@ button {
     width:  520px;
     top: 170px;
     right: 25px;
+    background-color: rgba(0,0,0,0.3);
 }
 
 #infoWrapper{
@@ -84,6 +94,7 @@ button {
     top: 210px;
     right: 285px;
     box-shadow: 0px 0px 0px 2px white inset;
+    background-color: rgba(0,0,0,0.3);
 }
 
 #buttonWrapper{
@@ -96,15 +107,12 @@ button {
 }
 
 #textDisplay {
-    top: 100px;
-    background-color: white;
+    color: yellow;
+    padding-top: 5px;
+    padding-left: 5px;
     height: 150px;
+    background-color: rgba(0,0,0,0.3);
 }
-
-#even {
-
-}
-
 #red {
     background: red;
 }
@@ -113,23 +121,15 @@ button {
     background: black;
 }
 
-#odd {
-
-}
-
 #zerosWrapper{
     float: left;
     height: 120px;
     width: 40px;
 }
 #zero {
-    height: 60px;
-    width: 40px;
 }
 
 #doubleZero {
-    height: 60px;
-    width: 40px;
 }
 
 #one {

@@ -58,14 +58,17 @@
                 <div class="betEvenPayout" id="black">Black</div>
                 <div class="betEvenPayout" id="odd">Odd</div>
             </div>
-            <div id="infoWrapper"></div>
+            <div id="infoWrapper">
+                <div class="infoBox" id="bankrollDisplay">Bankroll: 100</div>
+                <div class="infoBox" id="betAmtDisplay">Bet Amount: 1</div>
+            </div>
             <div id="buttonWrapper">
                 <button onclick="table.spin()" id="drawButton" type="button">Spin!</button>
                 <button onclick="newGame()" id="resetButton" type="button">New Game</button>
             </div>
         </div>
 
-        <div id="textDisplay">Please open the console :)</div>
+        <div id="textDisplay">Welcome to Casino Roulette.  Please make a bet.</div>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <script src="roulette.js"></script>

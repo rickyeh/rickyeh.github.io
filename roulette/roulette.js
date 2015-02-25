@@ -7,10 +7,14 @@
 // Methods:
 //     bet() - Called when player makes a bet
 //     clearBet() - Called after each spin by the table to clear all bets.
+
 var player = {
     bankroll: 0,
     betAmt: 0,
     betNumber: '0',
+    bankroll_output: document.getElementById('bankrollDisplay'),
+    betAmt_output: document.getElementById('betAmtDisplay'),
+
 
     // Method: Sets the bet for the player of a specified amount and bet type
     // Params:
@@ -20,7 +24,12 @@ var player = {
         this.bankroll = this.bankroll - this.betAmt;
         this.betNumber = number;
 
+        this.bankroll_output.innerHTML = 'Bankroll: ' + this.bankroll;
+        this.betAmt_output.innerHTML = 'Bet Amount: ' + this.betAmt;
+
         console.log('I am betting ' + this.betAmt + ' chips on ' + number + '.');
+        table.output.innerHTML += '<br>A bet of '+ this.betAmt +' chip(s) has been placed on ' + this.betNumber;
+
         table.spin();  // FOR TESTING PURPOSES.  REMOVE LATER
     },
     // Method : Clears bets and resets bet amount to zero.
@@ -40,6 +49,7 @@ var player = {
 var table = {
     currentNum: {},
     payoutAmt: 0,
+    output: document.getElementById('textDisplay'),
     numbers:   [{value:'0', color:'Green'},
                 {value:'1', color:'Red'},
                 {value:'2', color:'Black'},
@@ -86,9 +96,13 @@ var table = {
             return;
         }
 
+        table.output.innerHTML = '';
+        table.output.innerHTML += 'The table is spun.'; 
+
         console.log('Table is spun.');
         this.currentNum = this.numbers[Math.floor(Math.random() * this.numbers.length)];
         console.log('The winning number is: ' + this.currentNum.value + ' ' + this.currentNum.color);
+        table.output.innerHTML += '<br>The winning number is: ' + this.currentNum.value + ' ' + this.currentNum.color; 
 
         this.payWinner(player.betAmt);
         player.clearBet();
@@ -100,27 +114,33 @@ var table = {
     payWinner: function(betAmt) {
 
         if (player.betNumber.toString() === this.currentNum.value) { // Number bets win 35x
-            console.log('Congratulations, you won!');
             this.payoutAmt = betAmt * 35;
             player.bankroll = player.bankroll + this.payoutAmt;
+            table.output.innerHTML += '<br>Congratulations, you won ' + this.payoutAmt + ' chips!';
+            console.log('Congratulations, you won!');
         } else if (player.betNumber === 'Black' && this.currentNum.color === 'Black') { // Color bets win 2x
-            console.log('Congratulations, you won!');
             this.payoutAmt = betAmt * 2;
             player.bankroll = player.bankroll + this.payoutAmt;
+            table.output.innerHTML += '<br>Congratulations, you won ' + this.payoutAmt + ' chips!';
+            console.log('Congratulations, you won!');
         } else if (player.betNumber === 'Red' && this.currentNum.color === 'Red') { // Color bets win 2x
-            console.log('Congratulations, you won!');
             this.payoutAmt = betAmt * 2;
             player.bankroll = player.bankroll + this.payoutAmt;
+            table.output.innerHTML += '<br>Congratulations, you won ' + this.payoutAmt + ' chips!';
+            console.log('Congratulations, you won!');
         } else if (player.betNumber === 'Even' && this.currentNum.value%2 === 0 && this.currentNum.color != 'Green') { // Even bets win 2x except 0's
-            console.log('Congratulations, you won!');
             this.payoutAmt = betAmt * 2;
             player.bankroll = player.bankroll + this.payoutAmt;
+            table.output.innerHTML += '<br>Congratulations, you won ' + this.payoutAmt + ' chips!';
+            console.log('Congratulations, you won!');
         } else if (player.betNumber === 'Odd' && this.currentNum.value%2 === 1) { // Odd bets win 2x
-            console.log('Congratulations, you won!');
             this.payoutAmt = betAmt * 2;
             player.bankroll = player.bankroll + this.payoutAmt;
+            table.output.innerHTML += '<br>Congratulations, you won ' + this.payoutAmt + ' chips!';
+            console.log('Congratulations, you won!');
         } else { // Nothing matches, player loses
             console.log('Sorry, try again!');
+            table.output.innerHTML += '<br>Sorry, try again!';
         }
         console.log(player.bankroll);
         console.log('Current Bankroll is : ' + player.bankroll);
@@ -216,137 +236,140 @@ function drawCanvas() {
 }
 
 // CLICK FUNCTIONS FOR THE BETTINGS
+function createBets() {
 
-$('#even').click(function() {
-    player.bet('Even');
-});
-$('#red').click(function() {
-    player.bet('Red');
-});
-$('#black').click(function() {
-    player.bet('Black');
-});
-$('#odd').click(function() {
-    player.bet('Odd');
-});
-$('#zero').click(function() {
-    player.bet('0');
-});
-$('#doubleZero').click(function() {
-    player.bet('00');
-});
-$('#one').click(function() {
-    player.bet('1');
-});
-$('#two').click(function() {
-    player.bet('2');
-});
-$('#three').click(function() {
-    player.bet('3');
-});
-$('#four').click(function() {
-    player.bet('4');
-});
-$('#five').click(function() {
-    player.bet('5');
-});
-$('#six').click(function() {
-    player.bet('6');
-});
-$('#seven').click(function() {
-    player.bet('7');
-});
-$('#eight').click(function() {
-    player.bet('8');
-});
-$('#nine').click(function() {
-    player.bet('9');
-});
-$('#ten').click(function() {
-    player.bet('10');
-});
-$('#eleven').click(function() {
-    player.bet('11');
-});
-$('#twelve').click(function() {
-    player.bet('12');
-});
-$('#thirteen').click(function() {
-    player.bet('13');
-});
-$('#fourteen').click(function() {
-    player.bet('14');
-});
-$('#fifteen').click(function() {
-    player.bet('15');
-});
-$('#sixteen').click(function() {
-    player.bet('16');
-});
-$('#seventeen').click(function() {
-    player.bet('17');
-});
-$('#eighteen').click(function() {
-    player.bet('18');
-});
-$('#nineteen').click(function() {
-    player.bet('19');
-});
-$('#twenty').click(function() {
-    player.bet('20');
-});
-$('#twentyone').click(function() {
-    player.bet('21');
-});
-$('#twentytwo').click(function() {
-    player.bet('22');
-});
-$('#twentythree').click(function() {
-    player.bet('23');
-});
-$('#twentyfour').click(function() {
-    player.bet('24');
-});
-$('#twentyfive').click(function() {
-    player.bet('25');
-});
-$('#twentysix').click(function() {
-    player.bet('26');
-});
-$('#twentyseven').click(function() {
-    player.bet('27');
-});
-$('#twentyeight').click(function() {
-    player.bet('28');
-});
-$('#twentynine').click(function() {
-    player.bet('29');
-});
-$('#thirty').click(function() {
-    player.bet('30');
-});
-$('#thirtyone').click(function() {
-    player.bet('31');
-});
-$('#thirtytwo').click(function() {
-    player.bet('32');
-});
-$('#thirtythree').click(function() {
-    player.bet('33');
-});
-$('#thirtyfour').click(function() {
-    player.bet('34');
-});
-$('#thirtyfive').click(function() {
-    player.bet('35');
-});
-$('#thirtysix').click(function() {
-    player.bet('36');
-});
+    $('#even').click(function() {
+        player.bet('Even');
+    });
+    $('#red').click(function() {
+        player.bet('Red');
+    });
+    $('#black').click(function() {
+        player.bet('Black');
+    });
+    $('#odd').click(function() {
+        player.bet('Odd');
+    });
+    $('#zero').click(function() {
+        player.bet('0');
+    });
+    $('#doubleZero').click(function() {
+        player.bet('00');
+    });
+    $('#one').click(function() {
+        player.bet('1');
+    });
+    $('#two').click(function() {
+        player.bet('2');
+    });
+    $('#three').click(function() {
+        player.bet('3');
+    });
+    $('#four').click(function() {
+        player.bet('4');
+    });
+    $('#five').click(function() {
+        player.bet('5');
+    });
+    $('#six').click(function() {
+        player.bet('6');
+    });
+    $('#seven').click(function() {
+        player.bet('7');
+    });
+    $('#eight').click(function() {
+        player.bet('8');
+    });
+    $('#nine').click(function() {
+        player.bet('9');
+    });
+    $('#ten').click(function() {
+        player.bet('10');
+    });
+    $('#eleven').click(function() {
+        player.bet('11');
+    });
+    $('#twelve').click(function() {
+        player.bet('12');
+    });
+    $('#thirteen').click(function() {
+        player.bet('13');
+    });
+    $('#fourteen').click(function() {
+        player.bet('14');
+    });
+    $('#fifteen').click(function() {
+        player.bet('15');
+    });
+    $('#sixteen').click(function() {
+        player.bet('16');
+    });
+    $('#seventeen').click(function() {
+        player.bet('17');
+    });
+    $('#eighteen').click(function() {
+        player.bet('18');
+    });
+    $('#nineteen').click(function() {
+        player.bet('19');
+    });
+    $('#twenty').click(function() {
+        player.bet('20');
+    });
+    $('#twentyone').click(function() {
+        player.bet('21');
+    });
+    $('#twentytwo').click(function() {
+        player.bet('22');
+    });
+    $('#twentythree').click(function() {
+        player.bet('23');
+    });
+    $('#twentyfour').click(function() {
+        player.bet('24');
+    });
+    $('#twentyfive').click(function() {
+        player.bet('25');
+    });
+    $('#twentysix').click(function() {
+        player.bet('26');
+    });
+    $('#twentyseven').click(function() {
+        player.bet('27');
+    });
+    $('#twentyeight').click(function() {
+        player.bet('28');
+    });
+    $('#twentynine').click(function() {
+        player.bet('29');
+    });
+    $('#thirty').click(function() {
+        player.bet('30');
+    });
+    $('#thirtyone').click(function() {
+        player.bet('31');
+    });
+    $('#thirtytwo').click(function() {
+        player.bet('32');
+    });
+    $('#thirtythree').click(function() {
+        player.bet('33');
+    });
+    $('#thirtyfour').click(function() {
+        player.bet('34');
+    });
+    $('#thirtyfive').click(function() {
+        player.bet('35');
+    });
+    $('#thirtysix').click(function() {
+        player.bet('36');
+    });
+}
 
 // MAIN PROGRAM STARTS HERE
 newGame();
 drawCanvas();
+createBets();
 
 console.log('Make bet with console command: player.bet(Amount,Number)');
 
