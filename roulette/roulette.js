@@ -30,7 +30,7 @@ var player = {
         console.log('I am betting ' + this.betAmt + ' chips on ' + number + '.');
         table.output.innerHTML += '<br>A bet of '+ this.betAmt +' chip(s) has been placed on ' + this.betNumber;
 
-        //table.spin();  // FOR TESTING PURPOSES.  REMOVE LATER
+        table.spin();  // FOR TESTING PURPOSES.  REMOVE LATER
     },
     // Method : Clears bets and resets bet amount to zero.
     clearBet: function() {
@@ -48,6 +48,7 @@ var player = {
 //     payWinner() - Finds any winning bets and pays out appropriate amount
 var table = {
     currentNum: {},
+    highlightedNum: {value:'0', color:'Green'},
     payoutAmt: 0,
     output: document.getElementById('textDisplay'),
     numbers:   [{value:'0', color:'Green'},
@@ -95,9 +96,9 @@ var table = {
             console.log('Please make a bet first before spinning!');
             return;
         }
-
         table.output.innerHTML = '';
-        table.output.innerHTML += 'The table is spun.'; 
+        table.output.innerHTML += 'The table is spun.';
+        this.clearHighlightWin();
 
         console.log('Table is spun.');
         this.currentNum = this.numbers[Math.floor(Math.random() * this.numbers.length)];
@@ -107,6 +108,18 @@ var table = {
         this.payWinner(player.betAmt);
         player.bankroll_output.innerHTML = 'Bankroll: ' + player.bankroll;
         player.clearBet();
+        table.highlightWin();
+    },
+
+    // Method: Highlights the DIV of the corresponding winning number after a spin.
+    highlightWin: function() {
+        document.getElementById('box'+this.currentNum.value).style.boxShadow='0px 0px 0px 5px yellow inset';
+        this.highlightedNum = this.currentNum;  // Make copy of current winning number for clearHighlightWin()
+    },
+
+    // Method: Clears the previously highlighted element that was done by highlightWin() before every spin
+    clearHighlightWin: function() {
+        document.getElementById('box'+this.highlightedNum.value).style.boxShadow='0px 0px 0px 1px white inset';
     },
 
     // Method: Calculates any winnings based on amount bet by comparing numbers and bets
@@ -154,12 +167,16 @@ function newGame() {
     table.output.innerHTML = 'New game is starting...';
     player.bankroll = 100;
     player.betAmt = 1;
+    player.bankroll_output.innerHTML = 'Bankroll: ' + player.bankroll;
 }
 
 // HTML CANVAS CODE FOR ROULETTE WHEEL STARTS HERE
 function drawCanvas() {
         var canvas = document.getElementById('myCanvas');
         var ctx = canvas.getContext('2d');
+
+        canvas.width = 400;
+        canvas.height = 400;
 
         var centerX = canvas.width / 2;
         var centerY = canvas.height / 2;
@@ -237,7 +254,7 @@ function drawCanvas() {
         drawCircle(10, 'yellow');
 }
 
-// CLICK FUNCTIONS FOR THE BETTINGS
+// Method: Creates click handlers for the DIVs
 function createBets() {
 
     // Anonymous function to pass in captured value.
@@ -265,14 +282,11 @@ function createBets() {
     $('#odd').click(function() {
         player.bet('Odd');
     });
-    $('#doubleZero').click(function() {
+    $('#box00').click(function() {
         player.bet('00');
     });
 }
 
-function drawDot() {
-
-}
 
 // MAIN PROGRAM STARTS HERE
 newGame();

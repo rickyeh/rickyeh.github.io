@@ -1,10 +1,8 @@
-
 html {
     background-color: #348C3E;
     background: url('images/green-felt.jpg');
     background-size: cover;
 }
-
 
 body {
     font-family: Arial;
@@ -18,7 +16,6 @@ div {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-
 }
 
 button {
@@ -29,6 +26,7 @@ button {
 }
 
 .betNumber {
+    position: relative;
     float: left;
     height: 40px;
     width: 40px;
@@ -49,6 +47,7 @@ button {
 }
 
 .betGreen {
+    position: absolute;
     box-shadow: 0px 0px 0px 1px white inset;
     text-align: center;
     color: white;
@@ -83,6 +82,10 @@ button {
 #myCanvas {
     position: absolute;
     margin-right: auto;
+}
+
+#box0{
+    position: relative;
 }
 
 #numberWrapper {
