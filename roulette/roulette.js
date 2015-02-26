@@ -1,4 +1,3 @@
-
 // Object : Represents the player in the roulette game.
 // Properties :
 //     bankroll - How much money the player currently has.
@@ -28,9 +27,9 @@ var player = {
         this.betAmt_output.innerHTML = 'Bet Amount: ' + this.betAmt;
 
         console.log('I am betting ' + this.betAmt + ' chips on ' + number + '.');
-        table.output.innerHTML += '<br>A bet of '+ this.betAmt +' chip(s) has been placed on ' + this.betNumber;
+        table.output.innerHTML += '<br>A bet of ' + this.betAmt + ' chip(s) has been placed on ' + this.betNumber;
 
-        table.spin();  // FOR TESTING PURPOSES.  REMOVE LATER
+        table.spin(); // FOR TESTING PURPOSES.  REMOVE LATER
     },
     // Method : Clears bets and resets bet amount to zero.
     clearBet: function() {
@@ -47,11 +46,14 @@ var player = {
 //     spin() - Called when wheel is spun to generate a new winning number
 //     payWinner() - Finds any winning bets and pays out appropriate amount
 var table = {
-    currentNum: {},
-    highlightedNum: {value:'0', color:'Green'},
-    payoutAmt: 0,
-    output: document.getElementById('textDisplay'),
-    numbers:   [{value:'0', color:'Green'},
+        currentNum: {},
+        highlightedNum: {
+            value: '0',
+            color: 'Green'
+        },
+        payoutAmt: 0,
+        output: document.getElementById('textDisplay'),
+        numbers:[{value:'0', color:'Green'},
                 {value:'1', color:'Red'},
                 {value:'2', color:'Black'},
                 {value:'3', color:'Red'},
@@ -103,7 +105,7 @@ var table = {
         console.log('Table is spun.');
         this.currentNum = this.numbers[Math.floor(Math.random() * this.numbers.length)];
         console.log('The winning number is: ' + this.currentNum.value + ' ' + this.currentNum.color);
-        table.output.innerHTML += '<br>The winning number is: ' + this.currentNum.value + ' ' + this.currentNum.color; 
+        table.output.innerHTML += '<br>The winning number is: ' + this.currentNum.value + ' ' + this.currentNum.color;
 
         this.payWinner(player.betAmt);
         player.bankroll_output.innerHTML = 'Bankroll: ' + player.bankroll;
@@ -113,13 +115,13 @@ var table = {
 
     // Method: Highlights the DIV of the corresponding winning number after a spin.
     highlightWin: function() {
-        document.getElementById('box'+this.currentNum.value).style.boxShadow='0px 0px 0px 5px yellow inset';
-        this.highlightedNum = this.currentNum;  // Make copy of current winning number for clearHighlightWin()
+        document.getElementById('box' + this.currentNum.value).style.boxShadow = '0px 0px 0px 5px yellow inset';
+        this.highlightedNum = this.currentNum; // Make copy of current winning number for clearHighlightWin()
     },
 
     // Method: Clears the previously highlighted element that was done by highlightWin() before every spin
     clearHighlightWin: function() {
-        document.getElementById('box'+this.highlightedNum.value).style.boxShadow='0px 0px 0px 1px white inset';
+        document.getElementById('box' + this.highlightedNum.value).style.boxShadow = '0px 0px 0px 1px white inset';
     },
 
     // Method: Calculates any winnings based on amount bet by comparing numbers and bets
@@ -142,12 +144,12 @@ var table = {
             player.bankroll = player.bankroll + this.payoutAmt;
             table.output.innerHTML += '<br>Congratulations, you won ' + this.payoutAmt + ' chips!';
             console.log('Congratulations, you won!');
-        } else if (player.betNumber === 'Even' && this.currentNum.value%2 === 0 && this.currentNum.color != 'Green') { // Even bets win 2x except 0's
+        } else if (player.betNumber === 'Even' && this.currentNum.value % 2 === 0 && this.currentNum.color != 'Green') { // Even bets win 2x except 0's
             this.payoutAmt = betAmt * 2;
             player.bankroll = player.bankroll + this.payoutAmt;
             table.output.innerHTML += '<br>Congratulations, you won ' + this.payoutAmt + ' chips!';
             console.log('Congratulations, you won!');
-        } else if (player.betNumber === 'Odd' && this.currentNum.value%2 === 1) { // Odd bets win 2x
+        } else if (player.betNumber === 'Odd' && this.currentNum.value % 2 === 1) { // Odd bets win 2x
             this.payoutAmt = betAmt * 2;
             player.bankroll = player.bankroll + this.payoutAmt;
             table.output.innerHTML += '<br>Congratulations, you won ' + this.payoutAmt + ' chips!';
@@ -172,64 +174,84 @@ function newGame() {
 
 // HTML CANVAS CODE FOR ROULETTE WHEEL STARTS HERE
 function drawCanvas() {
-        var canvas = document.getElementById('myCanvas');
-        var ctx = canvas.getContext('2d');
+    var canvas = document.getElementById('myCanvas');
+    var ctx = canvas.getContext('2d');
 
-        canvas.width = 400;
-        canvas.height = 400;
+    canvas.width = 400;
+    canvas.height = 400;
 
-        var centerX = canvas.width / 2;
-        var centerY = canvas.height / 2;
-        var radius;
+    var centerX = canvas.width / 2;
+    var centerY = canvas.height / 2;
+    var radius;
 
-        // Function to draw a circle with a fill color.
-        // Parameters:
-        //     radius - desired radius of the circle
-        //     color - color that the circle is to be filled with
+    // Function to draw a circle with a fill color.
+    // Parameters:
+    //     radius - desired radius of the circle
+    //     color - color that the circle is to be filled with
 
-        function drawCircle(radius, color) {
-            ctx.beginPath();
-            ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
-            ctx.fillStyle = color;
-            ctx.fill();
-            ctx.lineWidth = 2;
-            ctx.strokeStyle = 'black';
-            ctx.stroke();
+    function drawCircle(radius, color) {
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
+        ctx.fillStyle = color;
+        ctx.fill();
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = 'black';
+        ctx.stroke();
+    }
+
+    // Function to draw lines from the center of the canvas.
+    // Parameters: 
+    //     radius - radius of the circle
+    //     radians - angle in radians for the desired end point of the line
+
+    function drawLine(radius, radians) {
+
+        var x = centerX + radius * Math.cos(radians);
+        var y = centerY + radius * Math.sin(radians);
+
+        ctx.beginPath();
+        ctx.moveTo(centerX, centerY);
+        ctx.lineTo(x, y);
+        ctx.lineWidth = 1;
+        ctx.strokeStyle = 'white';
+        ctx.stroke();
+    }
+
+    function drawHandle(radians) {
+        radius = 60;
+
+        var x = centerX + radius * Math.cos(radians);
+        var y = centerY + radius * Math.sin(radians);
+
+        ctx.beginPath();
+        ctx.moveTo(centerX, centerY);
+        ctx.lineTo(x, y);
+
+        ctx.lineWidth = 7;
+        ctx.strokeStyle = 'white';
+        ctx.stroke();
+    }
+
+    function drawText() {
+        var arrayOfNumbers = ['0', '28', '9', '26', '30', '11', '7',
+            '20', '32', '17', '5', '22', '34', '15', '3', '24', '36', '13', '1',
+            '00', '27', '10', '25', '29', '12', '8', '19', '31', '18', '6', '21',
+            '33', '16', '4', '23', '35', '14', '2'
+        ];
+
+        for (var i = 0; i < 38; i++){
+            ctx.save();
+            ctx.translate(canvas.width / 2, canvas.height / 2);
+            ctx.rotate(i * 2 * Math.PI / 38);
+            ctx.font = '15px Arial';
+            ctx.fillStyle = '#FFFFFF';
+            ctx.textAlign = 'center';
+            ctx.fillText(arrayOfNumbers[i], 0, 168);
+            ctx.restore();
         }
+    }
 
-        // Function to draw lines from the center of the canvas.
-        // Parameters: 
-        //     radius - radius of the circle
-        //     radians - angle in radians for the desired end point of the line
-
-        function drawLine(radius, radians) {
-
-            var x = centerX + radius * Math.cos(radians);
-            var y = centerY + radius * Math.sin(radians);
-
-            ctx.beginPath();
-            ctx.moveTo(centerX, centerY);
-            ctx.lineTo(x, y);
-            ctx.lineWidth = 1;
-            ctx.strokeStyle = 'white';
-            ctx.stroke();
-        }
-
-        function drawHandle(radians) {
-            radius = 60;
-
-            var x = centerX + radius * Math.cos(radians);
-            var y = centerY + radius * Math.sin(radians);
-
-            ctx.beginPath();
-            ctx.moveTo(centerX, centerY);
-            ctx.lineTo(x, y);
-
-            ctx.lineWidth = 7;
-            ctx.strokeStyle = 'white';
-            ctx.stroke();
-        }
-
+    function drawRouletteWheel() {
         // Draw Roulette Wheel
         drawCircle(200, 'black');
         drawCircle(180, 'white');
@@ -252,22 +274,26 @@ function drawCanvas() {
         drawHandle(-Math.PI / 2);
 
         drawCircle(10, 'yellow');
+    }
+
+    drawRouletteWheel();
+    drawText();
 }
 
 // Method: Creates click handlers for the DIVs
 function createBets() {
 
     // Anonymous function to pass in captured value.
-    function createAnonFunction (capturedNum){
-        var anonFcn = function(){
+    function createAnonFunction(capturedNum) {
+        var anonFcn = function() {
             player.bet(capturedNum);
         };
         return anonFcn;
     }
 
     // Sets the click triggers from the numbers 0-36
-    for(var i = 0; i < 37; ++i){
-        $('#box'+ i ).click(createAnonFunction(i));
+    for (var i = 0; i < 37; ++i) {
+        $('#box' + i).click(createAnonFunction(i));
     }
 
     $('#even').click(function() {
@@ -289,9 +315,10 @@ function createBets() {
 
 
 // MAIN PROGRAM STARTS HERE
-newGame();
-drawCanvas();
-createBets();
+$(function() {
+    newGame();
+    drawCanvas();
+    createBets();
+});
 
 console.log('Make bet with console command: player.bet(Amount,Number)');
-
