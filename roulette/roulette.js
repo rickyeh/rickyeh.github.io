@@ -54,43 +54,43 @@ var table = {
         payoutAmt: 0,
         output: document.getElementById('textDisplay'),
         numbers:[{value:'0', color:'Green'},
-                {value:'1', color:'Red'},
-                {value:'2', color:'Black'},
-                {value:'3', color:'Red'},
-                {value:'4', color:'Black'},
-                {value:'5', color:'Red'},
-                {value:'6', color:'Black'},
-                {value:'7', color:'Red'},
-                {value:'8', color:'Black'},
-                {value:'9', color:'Red'},
-                {value:'10', color:'Black'},
-                {value:'11', color:'Black'},
-                {value:'12', color:'Red'},
-                {value:'13', color:'Black'},
-                {value:'14', color:'Red'},
-                {value:'15', color:'Black'},
-                {value:'16', color:'Red'},
-                {value:'17', color:'Black'},
-                {value:'18', color:'Red'},
-                {value:'19', color:'Black'},
-                {value:'20', color:'Black'},
-                {value:'21', color:'Red'},
-                {value:'22', color:'Black'},
-                {value:'23', color:'Red'},
-                {value:'24', color:'Black'},
-                {value:'25', color:'Red'},
-                {value:'26', color:'Black'},
-                {value:'27', color:'Red'},
                 {value:'28', color:'Red'},
-                {value:'29', color:'Black'},
+                {value:'9', color:'Red'},
+                {value:'26', color:'Black'},
                 {value:'30', color:'Red'},
-                {value:'31', color:'Black'},
+                {value:'11', color:'Black'},
+                {value:'7', color:'Red'},
+                {value:'20', color:'Black'},
                 {value:'32', color:'Red'},
-                {value:'33', color:'Black'},
+                {value:'17', color:'Black'},
+                {value:'5', color:'Red'},
+                {value:'22', color:'Black'},
                 {value:'34', color:'Red'},
-                {value:'35', color:'Black'},
+                {value:'15', color:'Black'},
+                {value:'3', color:'Red'},
+                {value:'24', color:'Black'},
                 {value:'36', color:'Red'},
-                {value:'00', color:'Green'}],
+                {value:'13', color:'Black'},
+                {value:'1', color:'Red'},
+                {value:'00', color:'Green'},
+                {value:'27', color:'Red'},
+                {value:'10', color:'Black'},
+                {value:'25', color:'Red'},
+                {value:'29', color:'Black'},
+                {value:'12', color:'Red'},
+                {value:'8', color:'Black'},
+                {value:'19', color:'Black'},
+                {value:'31', color:'Black'},
+                {value:'18', color:'Red'},
+                {value:'6', color:'Black'},
+                {value:'21', color:'Red'},
+                {value:'33', color:'Black'},
+                {value:'16', color:'Red'},
+                {value:'4', color:'Black'},
+                {value:'23', color:'Red'},
+                {value:'35', color:'Black'},
+                {value:'14', color:'Red'},
+                {value:'2', color:'Black'}],
 
     // Method : Generates a random number from the array of possible numbers and calls payWinner()
     spin: function() {
@@ -106,11 +106,13 @@ var table = {
         this.currentNum = this.numbers[Math.floor(Math.random() * this.numbers.length)];
         console.log('The winning number is: ' + this.currentNum.value + ' ' + this.currentNum.color);
         table.output.innerHTML += '<br>The winning number is: ' + this.currentNum.value + ' ' + this.currentNum.color;
+        table.drawBall(this.currentNum.value);
 
         this.payWinner(player.betAmt);
         player.bankroll_output.innerHTML = 'Bankroll: ' + player.bankroll;
         player.clearBet();
         table.highlightWin();
+
     },
 
     // Method: Highlights the DIV of the corresponding winning number after a spin.
@@ -160,6 +162,34 @@ var table = {
         }
         console.log(player.bankroll);
         console.log('Current Bankroll is : ' + player.bankroll);
+    },
+
+    // Method: Creates a second top layer canvas and searches my array of numbers for passed
+    //         in number.  When it's found, it draws a ball at the appropriate space on the wheel.
+    // Params:
+    //      number: The winning number to be searched for and for the ball to be placed at.
+    drawBall: function(number) {
+    var canvas = document.getElementById('myBallCanvas');
+    var ctx = canvas.getContext('2d');
+
+    canvas.width = 400;
+    canvas.height = 400;
+
+        for (var i = 0 ; i<=37 ; i++) {
+            if (table.numbers[i].value == number.toString()){
+                ctx.save();
+                ctx.translate(canvas.width / 2, canvas.height / 2);
+                ctx.rotate(i * 2 * Math.PI / 38);  // Rotate radians to place ballß
+                ctx.beginPath();
+                ctx.arc(0, 155, 5, 0, 2 * Math.PI, false);
+                ctx.fillStyle = '#FFCC00';  // Gold Color
+                ctx.fill();
+                ctx.lineWidth = 1;
+                ctx.strokeStyle = 'black';
+                ctx.stroke();
+                ctx.restore();
+            }
+        }
     }
 };
 
@@ -233,11 +263,6 @@ function drawCanvas() {
     }
 
     function drawText() {
-        var arrayOfNumbers = ['0', '28', '9', '26', '30', '11', '7',
-            '20', '32', '17', '5', '22', '34', '15', '3', '24', '36', '13', '1',
-            '00', '27', '10', '25', '29', '12', '8', '19', '31', '18', '6', '21',
-            '33', '16', '4', '23', '35', '14', '2'
-        ];
 
         for (var i = 0; i < 38; i++){
             ctx.save();
@@ -246,7 +271,7 @@ function drawCanvas() {
             ctx.font = '15px Arial';
             ctx.fillStyle = '#FFFFFF';
             ctx.textAlign = 'center';
-            ctx.fillText(arrayOfNumbers[i], 0, 168);
+            ctx.fillText(table.numbers[i].value, 0, 168);
             ctx.restore();
         }
     }
@@ -274,10 +299,11 @@ function drawCanvas() {
         drawHandle(-Math.PI / 2);
 
         drawCircle(10, 'yellow');
-    }
 
+        drawText();
+        table.drawBall('0');
+    }
     drawRouletteWheel();
-    drawText();
 }
 
 // Method: Creates click handlers for the DIVs
