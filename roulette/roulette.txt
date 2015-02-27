@@ -1,8 +1,8 @@
 Features
-    - Graphic of a roulette wheel
-    - Graphic of roulette betting area
-    - Way to keep track of amount of money
+    - Animation
     - Betting System
+    - Gradiant Ball graphics
 
 Bugs
     - Fix Border Widths
+    - Negative bankroll

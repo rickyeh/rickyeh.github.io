@@ -47,10 +47,7 @@ var player = {
 //     payWinner() - Finds any winning bets and pays out appropriate amount
 var table = {
         currentNum: {},
-        highlightedNum: {
-            value: '0',
-            color: 'Green'
-        },
+        highlightedNum: {value: '0', color: 'Green'},
         payoutAmt: 0,
         output: document.getElementById('textDisplay'),
         numbers:[{value:'0', color:'Green'},
@@ -112,7 +109,6 @@ var table = {
         player.bankroll_output.innerHTML = 'Bankroll: ' + player.bankroll;
         player.clearBet();
         table.highlightWin();
-
     },
 
     // Method: Highlights the DIV of the corresponding winning number after a spin.
@@ -169,20 +165,21 @@ var table = {
     // Params:
     //      number: The winning number to be searched for and for the ball to be placed at.
     drawBall: function(number) {
-    var canvas = document.getElementById('myBallCanvas');
-    var ctx = canvas.getContext('2d');
+        var canvas = document.getElementById('myBallCanvas');
+        var ctx = canvas.getContext('2d');
 
-    canvas.width = 400;
-    canvas.height = 400;
+        canvas.width = 400;
+        canvas.height = 400;
 
-        for (var i = 0 ; i<=37 ; i++) {
-            if (table.numbers[i].value == number.toString()){
+        for (var i = 0; i <= 37; i++) {
+            if (table.numbers[i].value == number.toString()) {
                 ctx.save();
                 ctx.translate(canvas.width / 2, canvas.height / 2);
-                ctx.rotate(i * 2 * Math.PI / 38);  // Rotate radians to place ballß
+                ctx.rotate(Math.PI);  // Rotate once to account for outward text
+                ctx.rotate(i * 2 * Math.PI / 38); // Rotate radians to place ball
                 ctx.beginPath();
-                ctx.arc(0, 155, 5, 0, 2 * Math.PI, false);
-                ctx.fillStyle = '#FFCC00';  // Gold Color
+                ctx.arc(0, 135, 7, 0, 2 * Math.PI, false);
+                ctx.fillStyle = '#FFCC00'; // Gold Color
                 ctx.fill();
                 ctx.lineWidth = 1;
                 ctx.strokeStyle = 'black';
@@ -264,20 +261,21 @@ function drawCanvas() {
 
     function drawText() {
 
-        for (var i = 0; i < 38; i++){
+        for (var i = 0; i < 38; i++) {
             ctx.save();
             ctx.translate(canvas.width / 2, canvas.height / 2);
             ctx.rotate(i * 2 * Math.PI / 38);
             ctx.font = '15px Arial';
+            ctx.scale (1,1);
             ctx.fillStyle = '#FFFFFF';
             ctx.textAlign = 'center';
-            ctx.fillText(table.numbers[i].value, 0, 168);
+            ctx.fillText(table.numbers[i].value, 0, -155);
             ctx.restore();
         }
     }
 
     function drawRouletteWheel() {
-        // Draw Roulette Wheel
+        // Outer Wheel Circles (With Lines)
         drawCircle(200, 'black');
         drawCircle(180, 'white');
         drawCircle(175, 'red');
@@ -298,7 +296,7 @@ function drawCanvas() {
         drawHandle(Math.PI / 2);
         drawHandle(-Math.PI / 2);
 
-        drawCircle(10, 'yellow');
+        drawCircle(10, 'grey');
 
         drawText();
         table.drawBall('0');
