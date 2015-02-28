@@ -27,7 +27,7 @@ var player = {
         this.betAmt_output.innerHTML = 'Bet Amount: ' + this.betAmt;
 
         console.log('I am betting ' + this.betAmt + ' chips on ' + number + '.');
-        table.output.innerHTML += '<br>A bet of ' + this.betAmt + ' chip(s) has been placed on ' + this.betNumber;
+        table.output.innerHTML = '<br>A bet of ' + this.betAmt + ' chip(s) has been placed on ' + this.betNumber;
 
         table.spin(); // FOR TESTING PURPOSES.  REMOVE LATER
     },
@@ -95,8 +95,8 @@ var table = {
             console.log('Please make a bet first before spinning!');
             return;
         }
-        table.output.innerHTML = '';
-        table.output.innerHTML += 'The table is spun.';
+        table.output.innerHTML += '';
+        table.output.innerHTML += '<br>The table is spun.';
         this.clearHighlightWin();
 
         console.log('Table is spun.');
@@ -115,11 +115,31 @@ var table = {
     highlightWin: function() {
         document.getElementById('box' + this.currentNum.value).style.boxShadow = '0px 0px 0px 5px yellow inset';
         this.highlightedNum = this.currentNum; // Make copy of current winning number for clearHighlightWin()
+    
+        // Also highlights other non number winning elements.
+        if(this.currentNum.color =='Red'){
+            document.getElementById('red').style.boxShadow = '0px 0px 0px 3px yellow inset';
+        }
+        if(this.currentNum.color =='Black'){
+            document.getElementById('black').style.boxShadow = '0px 0px 0px 3px yellow inset';
+        }
+        if(this.currentNum.value % 2 === 0 && this.currentNum.color != 'Green'){
+            document.getElementById('even').style.boxShadow = '0px 0px 0px 3px yellow inset';
+        }
+        if(this.currentNum.value % 2 === 1){
+            document.getElementById('odd').style.boxShadow = '0px 0px 0px 3px yellow inset';
+        }
     },
 
-    // Method: Clears the previously highlighted element that was done by highlightWin() before every spin
+    // Method: Clears the previously highlighted element that was done by highlightWin() before every spin.
+    //         Also clears all other non numbered highlighted elements.
     clearHighlightWin: function() {
         document.getElementById('box' + this.highlightedNum.value).style.boxShadow = '0px 0px 0px 1px white inset';
+        document.getElementById('red').style.boxShadow = '0px 0px 0px 1px white inset';
+        document.getElementById('black').style.boxShadow = '0px 0px 0px 1px white inset';
+        document.getElementById('even').style.boxShadow = '0px 0px 0px 1px white inset';
+        document.getElementById('odd').style.boxShadow = '0px 0px 0px 1px white inset';
+        
     },
 
     // Method: Calculates any winnings based on amount bet by comparing numbers and bets
