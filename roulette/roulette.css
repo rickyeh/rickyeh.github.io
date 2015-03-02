@@ -23,6 +23,7 @@ button {
     height: 100px;
     font-size: 20px;
     float: left;
+    cursor: pointer;
 }
 
 .betNumber {
@@ -34,6 +35,7 @@ button {
     text-align: center;
     color: white;
     line-height: 40px;
+    cursor: pointer;
 }
 
 .betEvenPayout {
@@ -44,6 +46,7 @@ button {
     color: white;
     line-height: 40px;
     box-shadow: 0px 0px 0px 2px white inset;
+    cursor: pointer;
 }
 
 .betGreen {
@@ -55,6 +58,7 @@ button {
     height: 60px;
     width: 40px;
     background-color: rgba(0,255,0,0.6);
+    cursor: pointer;
 }
 
 .black {
