@@ -2,6 +2,7 @@ Features
     - Animation
     - Betting System
     - Gradiant Ball graphics
+    - Scrolling message system.
 
 Bugs
     - Fix Border Widths

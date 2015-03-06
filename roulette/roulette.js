@@ -43,6 +43,9 @@ var player = {
 // Methods:
 //     spin() - Called when wheel is spun to generate a new winning number
 //     payWinner() - Finds any winning bets and pays out appropriate amount
+//     highlightWin() - Highlights the winning number/boxes with a yellow border.
+//     clearHighlightWin () - Clears the highlights on the board
+
 var table = {
     currentNum: {},
     highlightedNum: {value: '0', color: 'Green'},
@@ -194,7 +197,7 @@ var tableUI = {
     centerX: 200,  // = width / 2
     centerY: 200,  // WTF?!  Can't use mathematical expression?
 
-    // Main function that draws the roulette wheel.  Calls other functions in this object
+    // Method: Main function that draws the roulette wheel.  Calls other functions in this object
     // to layer and draw each element.
     drawCanvas: function(){
         // Outer Wheel Circles (With Lines)
@@ -224,7 +227,7 @@ var tableUI = {
     },
 
 
-    // Function to draw a circle with a fill color.
+    // Method: Draws a circle with a fill color.
     // Parameters:
     //     radius - desired radius of the circle
     //     color - color that the circle is to be filled with
@@ -239,7 +242,7 @@ var tableUI = {
         ctx.strokeStyle = 'black';
         ctx.stroke();
     },
-    // Function to draw lines from the center of the canvas.
+    // Method: Draws a line from the center of the canvas.
     // Parameters: 
     //     radius - radius of the circle
     //     radians - angle in radians for the desired end point of the line
@@ -258,7 +261,7 @@ var tableUI = {
         ctx.stroke();
 
     },
-    // Function to draw a center spin handle
+    // Method: Draws a center spin handle
     // Parameters: 
     //     radians - angle in radians for the desired direction
     drawHandle: function(radians){
@@ -276,7 +279,7 @@ var tableUI = {
         ctx.strokeStyle = 'white';
         ctx.stroke();
     },
-    // Function to draw the circling text numbers on the wheel outward.
+    // Method: Draws the circling text numbers on the wheel outward.
     drawText: function(){
         var ctx = this.canvas.getContext('2d');
 
