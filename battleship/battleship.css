@@ -1,0 +1,21 @@
+body {
+    background-color: #E0E0E0;
+}
+
+div{
+    background-color: 'green';
+    height: 30px;
+    box-shadow: 0px 0px 0px 1px yellow inset;
+}
+
+h1{
+    text-align: center;
+}
+
+.boardCell{
+    background-color: #7D7D7D;
+    width: 100px;
+    height: 100px;
+    box-shadow: 0px 0px 0px 1px yellow inset;
+    float: left;
+}

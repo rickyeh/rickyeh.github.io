@@ -1,4 +1,10 @@
+var response = prompt('Do you want to play battleship? Yes/No');
 
+if (response.toLowerCase() === 'yes') {
+    alert('Awesome! Let us begin!');
+} else {  
+    alert('Doh!  Maybe next time :( ');
+}
 
 // Object to represent player
 var player = {
@@ -11,6 +17,7 @@ var player = {
     }
 };
 
+
 // Object to represent enemy
 var enemy = {
     numShips : 4,
@@ -20,7 +27,7 @@ var enemy = {
     destroyerHP:  2,
 
     // 2D Array of ships.  Manual placement for now.  Will randomize later.
-    //  x =  0  1  2  3  4  5  6  7  8 
+    //  x =  0  1  2  3  4  5  6  
     board: [[0, 0, 0, 0, 0, 0, 0],     // y = 0
             [0, 0, 0, 0, 0, 0, 0],     // y = 1
             [0, 5, 5, 5, 5, 5, 0],     // y = 2
@@ -61,11 +68,11 @@ var enemy = {
                     this.carrierHP--;
                     if (this.carrierHP === 0) {
                         console.log('You sunk my carrier!');
-                        this.numShips--;     
+                        this.numShips--;
                     }
                     break;
             }
-            this.board[y][x] = 0;       
+            this.board[y][x] = 0;
         } else {
             console.log('Miss!');
         }
@@ -78,3 +85,9 @@ var enemy = {
         }
     }
 };
+
+// Object to represent HTML Elements
+var boardUI = {
+    // someOutput : document.getElementbyID('someDiv');
+    // shotCounterOutput : document.getElementByID('shotCounterDiv');
+}
