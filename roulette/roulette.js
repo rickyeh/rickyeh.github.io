@@ -185,6 +185,7 @@ var table = {
 // Object : Holds various functions to draw the table's UI
 // Methods:
 //     drawCanvas() - Draws the main canvas element the roulette wheel is painted on
+//     drawArc()    - Draws an arc with a fill color of specified length
 //     drawCircle() - Draws a circle with a fill color
 //     drawLine()   - Draws a line from the center of the canvas outward.
 //     drawHandle() - Draws a spin handle in the center of the wheel
@@ -240,10 +241,13 @@ var tableUI = {
         this.drawText();
     },
 
-    // Method: Draws a circle with a fill color.
+    // Method: Draws an arc of a specified color and length.
     // Parameters:
-    //     radius - desired radius of the circle
-    //     color - color that ßthe circle is to be filled with
+    //     radius - desired radius of the arc
+    //     color - color that the arc is to be filled with
+    //     lineWidth - the thickness of the arc
+    //     startAngle - starting angle in radians
+    //     endAngle - the ending angle in radians
     drawArc: function(radius, color, lineWidth, startAngle, endAngle){
         var ctx = this.canvas.getContext('2d');
 
