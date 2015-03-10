@@ -200,16 +200,30 @@ var tableUI = {
     // Method: Main function that draws the roulette wheel.  Calls other functions in this object
     // to layer and draw each element.
     drawCanvas: function(){
-        // Outer Wheel Circles (With Lines)
-        this.drawCircle(200, 'black');
-        this.drawCircle(180, 'white');
-        this.drawCircle(175, 'red');
-        this.drawCircle(150, 'white');
-        this.drawCircle(145, 'black');
+        // Outer Wheel Circles
+        this.drawCircle(195, '#c04000');
+        this.drawArc(175,'white', 5, 0, 2 * Math.PI);
+
+        // Loop that draws the alternating color arcs of red/black
+        for (var i = 0; i <= 38; i++) {
+            if(i % 2 === 0) {
+                this.drawArc(150, 'red', 50, ((i*2*Math.PI)/38), ((i+1)*2*Math.PI)/38);
+            } else { 
+                this.drawArc(150, 'black', 50,((i*2*Math.PI)/38), ((i+1)*2*Math.PI)/38);
+            }
+        }
+
+        // Draw the Green Arcs for 0 and 00
+        this.drawArc(150, 'green', 50,((9*2*Math.PI)/38), ((9+1)*2*Math.PI)/38);
+        this.drawArc(150, 'green', 50,((28*2*Math.PI)/38), ((28+1)*2*Math.PI)/38);
+
+        // Draw the center white band
+        this.drawArc(150,'black', 7, 0, 2 * Math.PI);
+        this.drawArc(150,'white', 4, 0, 2 * Math.PI);
 
         // For loop to draw the lines
-        for (var i = 1; i <= 38; i++) {
-            this.drawLine(200, (i * 2 * Math.PI) / 38);
+        for (i = 1; i <= 38; i++) {
+            this.drawLine(175, (i * 2 * Math.PI) / 38);
         }
 
         // Draw remaining inner circles over lines
@@ -226,6 +240,19 @@ var tableUI = {
         this.drawText();
     },
 
+    // Method: Draws a circle with a fill color.
+    // Parameters:
+    //     radius - desired radius of the circle
+    //     color - color that ßthe circle is to be filled with
+    drawArc: function(radius, color, lineWidth, startAngle, endAngle){
+        var ctx = this.canvas.getContext('2d');
+
+        ctx.beginPath();
+        ctx.arc(this.centerX, this.centerY, radius, startAngle, endAngle, false);
+        ctx.lineWidth = lineWidth;
+        ctx.strokeStyle = color;
+        ctx.stroke();
+    },
 
     // Method: Draws a circle with a fill color.
     // Parameters:
@@ -271,12 +298,14 @@ var tableUI = {
         var x = this.centerX + radius * Math.cos(radians);
         var y = this.centerY + radius * Math.sin(radians);
 
+
         ctx.beginPath();
         ctx.moveTo(this.centerX, this.centerY);
         ctx.lineTo(x, y);
 
         ctx.lineWidth = 7;
         ctx.strokeStyle = 'white';
+
         ctx.stroke();
     },
     // Method: Draws the circling text numbers on the wheel outward.
@@ -291,7 +320,7 @@ var tableUI = {
             ctx.scale (1,1);
             ctx.fillStyle = '#FFFFFF';
             ctx.textAlign = 'center';
-            ctx.fillText(table.numbers[i].value, 0, -155);
+            ctx.fillText(table.numbers[i].value, 0, -157);
             ctx.restore();
         }
     },
