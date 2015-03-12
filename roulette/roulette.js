@@ -229,7 +229,10 @@ var tableUI = {
 
         // Draw remaining inner circles over lines
         this.drawCircle(125, 'white');
-        this.drawCircle(120, 'green');
+        this.drawGradientCircle(120);
+        //this.drawCircle(120, 'green');
+
+
 
         this.drawHandle(2 * Math.PI);
         this.drawHandle(Math.PI);
@@ -272,6 +275,25 @@ var tableUI = {
         ctx.lineWidth = 2;
         ctx.strokeStyle = 'black';
         ctx.stroke();
+    },
+    // Method: Draws the center circle with a gradient green color.
+    // Parameters:
+    //     radius - desired radius of the circle
+    drawGradientCircle: function(radius){
+        var ctx = this.canvas.getContext('2d');
+        var grd = ctx.createRadialGradient(this.centerX, this.centerY, 0, this.centerX, this.centerY, radius);
+        
+        grd.addColorStop(0, 'rgb(48,166,58)'); // starting color
+        grd.addColorStop(1, 'rgb(20,92,26)'); // ending color
+        ctx.fillStyle = grd;
+
+        ctx.beginPath();
+        ctx.arc(this.centerX, this.centerY, radius, 0, 2 * Math.PI, false);
+        ctx.fill();
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = 'black';
+        ctx.stroke();
+
     },
     // Method: Draws a line from the center of the canvas.
     // Parameters: 
