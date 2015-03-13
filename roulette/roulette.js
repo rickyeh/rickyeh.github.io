@@ -219,7 +219,6 @@ var tableUI = {
         this.drawArc(150, 'green', 50,((28*2*Math.PI)/38), ((28+1)*2*Math.PI)/38);
 
         // Draw the center white band
-        this.drawArc(150,'black', 7, 0, 2 * Math.PI);
         this.drawArc(150,'white', 4, 0, 2 * Math.PI);
 
         // For loop to draw the lines
@@ -228,12 +227,10 @@ var tableUI = {
         }
 
         // Draw remaining inner circles over lines
-        this.drawCircle(125, 'white');
+        this.drawArc(123,'white', 5, 0, 2 * Math.PI);
         this.drawGradientCircle(120);
-        //this.drawCircle(120, 'green');
 
-
-
+        // Draw 4 Handles
         this.drawHandle(2 * Math.PI);
         this.drawHandle(Math.PI);
         this.drawHandle(Math.PI / 2);

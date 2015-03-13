@@ -135,6 +135,7 @@ button {
     right: 285px;
     border-right: 2px solid white;
     border-left: 2px solid white;
+    border-bottom: 2px solid white;
     box-shadow: 0px 0px 0px 2px white inset;
     background-color: rgba(0,0,0,0.3);
 }
@@ -148,6 +149,7 @@ button {
     right: 25px;
     border-right: 2px solid white;
     border-left: 2px solid white;
+    border-bottom: 2px solid white;
 }
 
 #textDisplay {
