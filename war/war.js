@@ -33,6 +33,43 @@ function shuffleCards(array) {
     return array;
 }
 
+function getCardName(card) {
+    var value = card.value;
+    var suit = card.suit;
+
+    switch(value) {
+        case 11:
+            value = "J";
+            break;
+        case 12:
+            value = "Q";
+            break;
+        case 13:
+            value = "K";
+            break;
+        case 1:
+        case 14:
+            value = "A";
+            break;
+    }
+
+    switch(suit) {
+        case 0:
+            suit = "D";
+            break;
+        case 1:
+            suit = "C";
+            break;
+        case 2:
+            suit = "H";
+            break;
+        case 3:
+            suit = "S";
+            break;
+    }
+    return value + suit + ".png";
+}
+
 function draw() {
 
     var output = document.getElementById("textDisplay");
@@ -48,11 +85,11 @@ function draw() {
 
     console.log("Player One draws a card.");
     console.log(playerOneCurrentCard);
-    outputP1.innerHTML = playerOneCurrentCard.value;
+    outputP1.innerHTML = "<img src=/img/cards/"+ getCardName(playerOneCurrentCard) + ">";
 
     console.log("Player Two draws a card.");
     console.log(playerTwoCurrentCard);
-    outputP2.innerHTML = playerTwoCurrentCard.value;
+    outputP2.innerHTML = "<img src=/img/cards/"+ getCardName(playerTwoCurrentCard) + ">";
 
     // Compare the Two Cards to Determine Winner
     if (playerOneCurrentCard.value > playerTwoCurrentCard.value) {
