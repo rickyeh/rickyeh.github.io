@@ -1,0 +1,93 @@
+html {
+    background-color: #348C3E;
+    background: url('images/green-felt.jpg');
+    background-size: : cover;
+}
+
+body {
+    font-family: Arial;
+}
+
+
+#cardDisplayWrapper {
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    width: 600px;
+    height: 100px;
+}
+#playerOneDisplay {
+    position: absolute;
+    left: 10px;
+    text-align: center;
+    font-size: 100px;
+    width: 300px;
+    height: 100px;
+}
+
+#playerTwoDisplay {
+    position: absolute;
+    right: 10px;
+    text-align: center;
+    font-size: 100px;
+    width: 300px;
+    height: 100px;
+}
+
+#scoreDisplayWrapper {
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    width: 600px;
+    height: 30px;
+}
+
+#playerOneScore {
+    position: absolute;
+    left: 10px;
+    text-align: center;
+    font-size: 30px;
+    width: 300px;
+    height: 30px;
+}
+
+#playerTwoScore {
+    position: absolute;
+    right: 10px;
+    text-align: center;
+    font-size: 30px;
+    width: 300px;
+    height: 30px;
+}
+
+#textDisplay {
+    position: static;
+    text-align: center;
+    margin-top: 50px;
+    font-size: 20px;
+    height: 4em;
+}
+
+button {
+    width: 175px;
+    height: 40px;
+    font-size: 20px;
+}
+
+#buttonDiv {
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    width: 400px;
+    height: 40px;
+}
+
+#drawButton {
+    position: absolute;
+    left: 10px;
+}
+
+#resetButton {
+    position: absolute;
+    right: 10px;
+}
