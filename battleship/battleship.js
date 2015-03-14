@@ -1,10 +1,10 @@
-var response = prompt('Do you want to play battleship? Yes/No');
+// var response = prompt('Do you want to play battleship? Yes/No');
 
-if (response.toLowerCase() === 'yes') {
-    alert('Awesome! Let us begin!');
-} else {  
-    alert('Doh!  Maybe next time :( ');
-}
+// if (response.toLowerCase() === 'yes') {
+//     alert('Awesome! Let us begin!');
+// } else {  
+//     alert('Doh!  Maybe next time :( ');
+// }
 
 // Object to represent player
 var player = {

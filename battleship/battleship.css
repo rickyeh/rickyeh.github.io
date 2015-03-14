@@ -1,21 +1,73 @@
 body {
-    background-color: #E0E0E0;
+    font-family: Arial;
+    background-color: #223E4A;  /* Dark Slate Blue Background */
+    color: #EBFFFF;    /* Light Blue Text Color */
+/*    background-color: #092220;  Really Dark Blue, almost black.*/
 }
 
-div{
+div {
     background-color: 'green';
-    height: 30px;
-    box-shadow: 0px 0px 0px 1px yellow inset;
+/*    box-shadow: 0px 0px 0px 1px red inset;*/
 }
 
-h1{
+h1 {
     text-align: center;
 }
 
-.boardCell{
-    background-color: #7D7D7D;
-    width: 100px;
-    height: 100px;
-    box-shadow: 0px 0px 0px 1px yellow inset;
+.boardCell {
+    background-color: #0077BE;
+    width: 50px;
+    height: 50px;
+    box-shadow: 0px 0px 0px 1px #00BEA6 inset;
     float: left;
+}
+
+.numberLabel {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    float: left;
+}
+
+.numText { 
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+}
+
+.letterLabel {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    float: left;
+}
+
+.letText {
+    position: absolute;
+    line-height: 50px;
+    right: 0;
+    color: white;
+}
+
+#textDisplay {
+    height: 200px;
+    width: 600px;
+    margin-right: auto;
+    margin-left: auto;
+    padding-top: 10px;
+    padding-left: 10px;
+    background-color: rgba(0,0,0,0.2);
+}
+
+#enemyBoard {
+    position: relative;
+    background-color: #223E4A;
+    height: 400px;
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#shotCounter {
+
 }
