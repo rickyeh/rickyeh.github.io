@@ -13,7 +13,11 @@ var player = {
     // Method to shoot at a guessed position.
     shootPosition: function(letter, number){
         this.shotCounter++;
-        enemy.shootResponse(letter, number);
+        if (enemy.shootResponse(letter, number)){
+            return true;
+        } else {
+            return false;
+        }
     }
 };
 
@@ -37,7 +41,7 @@ var enemy = {
             [4, 0, 0, 0, 0, 0, 2]],     // y = 6
 
     // Method to calculate whether a shot hits, and respond appropriately.
-    shootResponse: function(y, x ){
+    shootResponse: function(x, y ){
         var shotValue = this.board[y][x];
 
         if (shotValue > 0){             // if shotValue > 0, then there is a ship.
@@ -75,6 +79,7 @@ var enemy = {
             this.board[y][x] = 0;
         } else {
             console.log('Miss!');
+            return false;
         }
 
         // When number of ships is 0, game is over.
@@ -83,11 +88,49 @@ var enemy = {
             console.log('It only took you ' + player.shotCounter + ' shots!');
             alert('Congratulations, you won the game!\nIt only took you ' + player.shotCounter + ' shots!');
         }
+        return true;
     }
 };
 
 // Object to represent HTML Elements
 var boardUI = {
     // someOutput : document.getElementbyID('someDiv');
-    // shotCounterOutput : document.getElementByID('shotCounterDiv');
-}
+    // shotCounterOutput : document.getElementByID('shotCounter'),
+    // shipCounterOutput : document.getElementByID('shipsRemaining')
+
+    createClickFire: function() {
+
+        // Create anonymouse function to pass in the i and j to use closure
+        function createAnonFunction(i, j) {
+            var anonFcn = function() {
+                if(player.shootPosition(i,j)){
+                    $(this).css('background-color', 'red');
+                } else {
+                    $(this).css('background-color', 'gray');
+                }
+            };
+            return anonFcn;
+        }
+
+        // Look to create all the click handlers on the grid
+        for (var i = 0; i < 7; ++i) {
+            for (var j = 0; j < 7; ++j) {
+                $('#box' + i + j).click(createAnonFunction(i, j));
+            }
+        }
+
+
+        // Typing out each box.  Time consuming.
+        // $('#box00').click(function() {
+        //     if(player.shootPosition(0,0)){
+        //         $(this).css('background-color', 'red');
+        //     } else {
+        //         $(this).css('background-color', 'gray');
+        //     }
+        // });
+    }
+};
+
+$(document).ready(function() {
+    boardUI.createClickFire();
+});
