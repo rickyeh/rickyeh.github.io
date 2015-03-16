@@ -13,6 +13,7 @@ var player = {
     // Method to shoot at a guessed position.
     shootPosition: function(letter, number){
         this.shotCounter++;
+        document.getElementById('shotCounter').innerHTML = 'Shots: ' + this.shotCounter;
         if (enemy.shootResponse(letter, number)){
             return true;
         } else {
@@ -52,6 +53,7 @@ var enemy = {
                     if (this.destroyerHP === 0) {
                         console.log('You sunk my destroyer!');
                         this.numShips--;
+                        document.getElementById('shipsRemaining').innerHTML = 'Ships Remaining: ' + this.numShips;
                     }
                     break;
                 case 3:                 // Cruiser
@@ -59,6 +61,7 @@ var enemy = {
                     if (this.cruiserHP === 0) {
                         console.log('You sunk my cruiser!');
                         this.numShips--;
+                        document.getElementById('shipsRemaining').innerHTML = 'Ships Remaining: ' + this.numShips;
                     }
                     break;
                 case 4:                 // Battleship
@@ -66,6 +69,7 @@ var enemy = {
                     if (this.battleshipHP === 0) {
                         console.log('You sunk my battleship!');
                         this.numShips--;
+                        document.getElementById('shipsRemaining').innerHTML = 'Ships Remaining: ' + this.numShips;
                     }
                     break;
                 case 5:                 // Carrier
@@ -73,6 +77,7 @@ var enemy = {
                     if (this.carrierHP === 0) {
                         console.log('You sunk my carrier!');
                         this.numShips--;
+                        document.getElementById('shipsRemaining').innerHTML = 'Ships Remaining: ' + this.numShips;
                     }
                     break;
             }
