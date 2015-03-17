@@ -81,8 +81,12 @@ var enemy = {
                     }
                     break;
             }
-            this.board[y][x] = 0;
-        } else {
+            this.board[y][x] = -1;
+        } else if (shotValue == -1) {
+            console.log('You\'ve already shot an enemy here!  Please select another square!');
+            return true;
+        }
+         else {
             console.log('Miss!');
             return false;
         }
@@ -99,13 +103,9 @@ var enemy = {
 
 // Object to represent HTML Elements
 var boardUI = {
-    // someOutput : document.getElementbyID('someDiv');
-    // shotCounterOutput : document.getElementByID('shotCounter'),
-    // shipCounterOutput : document.getElementByID('shipsRemaining')
-
     createClickFire: function() {
 
-        // Create anonymouse function to pass in the i and j to use closure
+        // Create anonymous function to pass in the i and j to use closure
         function createAnonFunction(i, j) {
             var anonFcn = function() {
                 if(player.shootPosition(i,j)){
@@ -116,11 +116,26 @@ var boardUI = {
             };
             return anonFcn;
         }
+        function createAnonFunction2() {
+            var anonFcn = function() {
+                $(this).addClass('hover');
+            };
+            return anonFcn;
+        }
+        function createAnonFunction3() {
+            var anonFcn = function() {
+                $(this).removeClass('hover');
+            };
+            return anonFcn;
+        }
 
         // Look to create all the click handlers on the grid
         for (var i = 0; i < 7; ++i) {
             for (var j = 0; j < 7; ++j) {
+                $('#box' + i + j).mouseover(createAnonFunction2());
+                $('#box' + i + j).mouseout(createAnonFunction3());
                 $('#box' + i + j).click(createAnonFunction(i, j));
+
             }
         }
 

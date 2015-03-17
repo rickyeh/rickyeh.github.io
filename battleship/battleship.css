@@ -24,6 +24,10 @@ h1 {
     cursor: pointer;
 }
 
+.hover {
+    background-color: #005F98;
+}
+
 .numberLabel {
     position: relative;
     width: 50px;
