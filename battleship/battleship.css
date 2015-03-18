@@ -24,7 +24,7 @@ h1 {
     cursor: pointer;
 }
 
-.hover {
+.boardCell:hover {
     background-color: #005F98;
 }
 

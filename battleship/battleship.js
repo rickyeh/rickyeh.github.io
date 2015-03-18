@@ -116,38 +116,14 @@ var boardUI = {
             };
             return anonFcn;
         }
-        function createAnonFunction2() {
-            var anonFcn = function() {
-                $(this).addClass('hover');
-            };
-            return anonFcn;
-        }
-        function createAnonFunction3() {
-            var anonFcn = function() {
-                $(this).removeClass('hover');
-            };
-            return anonFcn;
-        }
 
-        // Look to create all the click handlers on the grid
+
+        // Loop to initialize all click handlers and hover functions
         for (var i = 0; i < 7; ++i) {
             for (var j = 0; j < 7; ++j) {
-                $('#box' + i + j).mouseover(createAnonFunction2());
-                $('#box' + i + j).mouseout(createAnonFunction3());
                 $('#box' + i + j).click(createAnonFunction(i, j));
-
             }
         }
-
-
-        // Typing out each box.  Time consuming.
-        // $('#box00').click(function() {
-        //     if(player.shootPosition(0,0)){
-        //         $(this).css('background-color', 'red');
-        //     } else {
-        //         $(this).css('background-color', 'gray');
-        //     }
-        // });
     }
 };
 
