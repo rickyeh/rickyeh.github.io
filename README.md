@@ -12,6 +12,6 @@ Hi everyone.  Welcome to the repo that hosts my personal web page.  I will mainl
 
 My name is Rick and I'm programmer in the Los Angeles area.  Love to eat all kinds of amazing foods found around the city and experience all that life has to offer.
 
-* http://linkedin/in/rickyeh
+* http://www.linkedin.com/in/rickyeh
 * https://github.com/rickyeh
 
