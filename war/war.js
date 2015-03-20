@@ -207,25 +207,29 @@ function deckBuilder(){
 }
 
 // Function to pre load all images with jQuery so cards don't pop in slowly on first play.
-function initImages() {
+function preloadImages() {
+
     var arrayOfValues = ["2","3","4","5","6","7","8","9","10","J","Q","K","A"];
     var arrayOfSuits = ["D","C","H","S"];
-
-    $.preloadImages = function() {
-      for (var i = 0; i < arguments.length; i++){
-        $("<img />").attr("src", arguments[i]);
-      }
-    };
+    var arrayOfDeck = [];
 
     for (var i = 0; i < arrayOfValues.length; i++){
         for (var j = 0 ; j < arrayOfSuits.length; j++){
-            $.preloadImages("/img/cards/" + arrayOfValues[i] + arrayOfSuits[j] +".png"); 
+           arrayOfDeck.push("/img/cards/" + arrayOfValues[i] + arrayOfSuits[j] +".png");
         }
     }
+
+    function preload(arrayOfImages) {
+        $(arrayOfImages).each(function(){
+            $("<img/>")[0].src = this;
+        });
+    }
+
+    preload(arrayOfDeck);
 }
 
 deckBuilder();
 
 $(document).ready(function(){
-    initImages();    
+    preloadImages();    
 });
