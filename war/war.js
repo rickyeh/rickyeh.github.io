@@ -37,7 +37,7 @@ function getCardName(card) {
     var value = card.value;
     var suit = card.suit;
 
-    switch(value) {
+    switch (value) {
         case 11:
             value = "J";
             break;
@@ -53,7 +53,7 @@ function getCardName(card) {
             break;
     }
 
-    switch(suit) {
+    switch (suit) {
         case 0:
             suit = "D";
             break;
@@ -85,11 +85,11 @@ function draw() {
 
     console.log("Player One draws a card.");
     console.log(playerOneCurrentCard);
-    outputP1.innerHTML = "<img src=/img/cards/"+ getCardName(playerOneCurrentCard) + ">";
+    outputP1.innerHTML = "<img src=/img/cards/" + getCardName(playerOneCurrentCard) + ">";
 
     console.log("Player Two draws a card.");
     console.log(playerTwoCurrentCard);
-    outputP2.innerHTML = "<img src=/img/cards/"+ getCardName(playerTwoCurrentCard) + ">";
+    outputP2.innerHTML = "<img src=/img/cards/" + getCardName(playerTwoCurrentCard) + ">";
 
     // Compare the Two Cards to Determine Winner
     if (playerOneCurrentCard.value > playerTwoCurrentCard.value) {
@@ -121,7 +121,7 @@ function draw() {
     playerTwoCurrentCard = deckTwo[deckTwoCounter];
 
     //Determine winner if last card is pulled
-    if (deckOneCounter === numCards){
+    if (deckOneCounter === numCards) {
         console.log("The game is over!  You're out of cards!");
 
         if (playerOneScore > playerTwoScore) {
@@ -138,7 +138,7 @@ function draw() {
 }
 
 // Function to reset the game to initial state.
-function reset(){
+function reset() {
 
     var output = document.getElementById("textDisplay");
     var outputP1 = document.getElementById("playerOneDisplay");
@@ -179,18 +179,18 @@ function reset(){
 
 // Function to build a deck of card objects
 
-function deckBuilder(){
+function deckBuilder() {
     var card = {};
 
     // Initialize deck with double nested for loops.  
-    for (var i=0; i<=3; i++){
-        for(var j=2; j<=14; j++){
+    for (var i = 0; i <= 3; i++) {
+        for (var j = 2; j <= 14; j++) {
             deckOne.push(card = {value:j, suit: i});
          }
     }
 
-    for (i=0; i<=3; i++){
-        for(var j=2; j<=14; j++){
+    for (i = 0; i <= 3; i++) {
+        for (var j = 2; j <= 14; j++) {
             deckTwo.push(card = {value:j, suit: i});
          }
     }
@@ -209,18 +209,18 @@ function deckBuilder(){
 // Function to pre load all images with jQuery so cards don't pop in slowly on first play.
 function preloadImages() {
 
-    var arrayOfValues = ["2","3","4","5","6","7","8","9","10","J","Q","K","A"];
-    var arrayOfSuits = ["D","C","H","S"];
+    var arrayOfValues = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"];
+    var arrayOfSuits = ["D", "C", "H", "S"];
     var arrayOfDeck = [];
 
-    for (var i = 0; i < arrayOfValues.length; i++){
-        for (var j = 0 ; j < arrayOfSuits.length; j++){
-           arrayOfDeck.push("/img/cards/" + arrayOfValues[i] + arrayOfSuits[j] +".png");
+    for (var i = 0; i < arrayOfValues.length; i++) {
+        for (var j = 0; j < arrayOfSuits.length; j++) {
+            arrayOfDeck.push("/img/cards/" + arrayOfValues[i] + arrayOfSuits[j] + ".png");
         }
     }
 
     function preload(arrayOfImages) {
-        $(arrayOfImages).each(function(){
+        $(arrayOfImages).each(function() {
             $("<img/>")[0].src = this;
         });
     }
@@ -230,6 +230,6 @@ function preloadImages() {
 
 deckBuilder();
 
-$(document).ready(function(){
-    preloadImages();    
+$(document).ready(function() {
+    preloadImages();
 });

@@ -116,18 +116,18 @@ var table = {
     highlightWin: function() {
         document.getElementById('box' + this.currentNum.value).style.boxShadow = '0px 0px 0px 5px yellow inset';
         this.highlightedNum = this.currentNum; // Make copy of current winning number for clearHighlightWin()
-    
+
         // Also highlights other non number winning elements.
-        if(this.currentNum.color =='Red'){
+        if (this.currentNum.color == 'Red') {
             document.getElementById('red').style.boxShadow = '0px 0px 0px 3px yellow inset';
         }
-        if(this.currentNum.color =='Black'){
+        if (this.currentNum.color == 'Black') {
             document.getElementById('black').style.boxShadow = '0px 0px 0px 3px yellow inset';
         }
-        if(this.currentNum.value % 2 === 0 && this.currentNum.color != 'Green'){
+        if (this.currentNum.value % 2 === 0 && this.currentNum.color != 'Green') {
             document.getElementById('even').style.boxShadow = '0px 0px 0px 3px yellow inset';
         }
-        if(this.currentNum.value % 2 === 1){
+        if (this.currentNum.value % 2 === 1) {
             document.getElementById('odd').style.boxShadow = '0px 0px 0px 3px yellow inset';
         }
     },
@@ -140,7 +140,7 @@ var table = {
         document.getElementById('black').style.boxShadow = '0px 0px 0px 1px white inset';
         document.getElementById('even').style.boxShadow = '0px 0px 0px 1px white inset';
         document.getElementById('odd').style.boxShadow = '0px 0px 0px 1px white inset';
-        
+
     },
 
     // Method: Calculates any winnings based on amount bet by comparing numbers and bets
@@ -200,26 +200,26 @@ var tableUI = {
 
     // Method: Main function that draws the roulette wheel.  Calls other functions in this object
     // to layer and draw each element.
-    drawCanvas: function(){
+    drawCanvas: function() {
         // Outer Wheel Circles
         this.drawCircle(195, '#c04000');
-        this.drawArc(175,'white', 5, 0, 2 * Math.PI);
+        this.drawArc(175, 'white', 5, 0, 2 * Math.PI);
 
         // Loop that draws the alternating color arcs of red/black
         for (var i = 0; i <= 38; i++) {
-            if(i % 2 === 0) {
-                this.drawArc(150, 'red', 50, ((i*2*Math.PI)/38), ((i+1)*2*Math.PI)/38);
-            } else { 
-                this.drawArc(150, 'black', 50,((i*2*Math.PI)/38), ((i+1)*2*Math.PI)/38);
+            if (i % 2 === 0) {
+                this.drawArc(150, 'red', 50, ((i * 2 * Math.PI) / 38), ((i + 1) * 2 * Math.PI) / 38);
+            } else {
+                this.drawArc(150, 'black', 50, ((i * 2 * Math.PI) / 38), ((i + 1) * 2 * Math.PI) / 38);
             }
         }
 
         // Draw the Green Arcs for 0 and 00
-        this.drawArc(150, 'green', 50,((9*2*Math.PI)/38), ((9+1)*2*Math.PI)/38);
-        this.drawArc(150, 'green', 50,((28*2*Math.PI)/38), ((28+1)*2*Math.PI)/38);
+        this.drawArc(150, 'green', 50, ((9 * 2 * Math.PI) / 38), ((9 + 1) * 2 * Math.PI) / 38);
+        this.drawArc(150, 'green', 50, ((28 * 2 * Math.PI) / 38), ((28 + 1) * 2 * Math.PI) / 38);
 
         // Draw the center white band
-        this.drawArc(150,'white', 4, 0, 2 * Math.PI);
+        this.drawArc(150, 'white', 4, 0, 2 * Math.PI);
 
         // For loop to draw the lines
         for (i = 1; i <= 38; i++) {
@@ -227,7 +227,7 @@ var tableUI = {
         }
 
         // Draw remaining inner circles over lines
-        this.drawArc(123,'white', 5, 0, 2 * Math.PI);
+        this.drawArc(123, 'white', 5, 0, 2 * Math.PI);
         this.drawGradientCircle(120);
 
         // Draw 4 Handles
@@ -248,7 +248,7 @@ var tableUI = {
     //     lineWidth - the thickness of the arc
     //     startAngle - starting angle in radians
     //     endAngle - the ending angle in radians
-    drawArc: function(radius, color, lineWidth, startAngle, endAngle){
+    drawArc: function(radius, color, lineWidth, startAngle, endAngle) {
         var ctx = this.canvas.getContext('2d');
 
         ctx.beginPath();
@@ -262,7 +262,7 @@ var tableUI = {
     // Parameters:
     //     radius - desired radius of the circle
     //     color - color that the circle is to be filled with
-    drawCircle: function(radius, color){
+    drawCircle: function(radius, color) {
         var ctx = this.canvas.getContext('2d');
 
         ctx.beginPath();
@@ -276,10 +276,10 @@ var tableUI = {
     // Method: Draws the center circle with a gradient green color.
     // Parameters:
     //     radius - desired radius of the circle
-    drawGradientCircle: function(radius){
+    drawGradientCircle: function(radius) {
         var ctx = this.canvas.getContext('2d');
         var grd = ctx.createRadialGradient(this.centerX, this.centerY, 0, this.centerX, this.centerY, radius);
-        
+
         grd.addColorStop(0, 'rgb(48,166,58)'); // starting color
         grd.addColorStop(1, 'rgb(20,92,26)'); // ending color
         ctx.fillStyle = grd;
@@ -314,7 +314,7 @@ var tableUI = {
     // Method: Draws a center spin handle
     // Parameters: 
     //     radians - angle in radians for the desired direction
-    drawHandle: function(radians){
+    drawHandle: function(radians) {
         var ctx = this.canvas.getContext('2d');
         var radius = 60;
 
@@ -332,7 +332,7 @@ var tableUI = {
         ctx.stroke();
     },
     // Method: Draws the circling text numbers on the wheel outward.
-    drawText: function(){
+    drawText: function() {
         var ctx = this.canvas.getContext('2d');
 
         for (var i = 0; i < 38; i++) {
@@ -340,7 +340,7 @@ var tableUI = {
             ctx.translate(this.canvas.width / 2, this.canvas.height / 2);
             ctx.rotate(i * 2 * Math.PI / 38);
             ctx.font = '15px Arial';
-            ctx.scale (1,1);
+            ctx.scale(1, 1);
             ctx.fillStyle = '#FFFFFF';
             ctx.textAlign = 'center';
             ctx.fillText(table.numbers[i].value, 0, -157);
@@ -350,17 +350,17 @@ var tableUI = {
     // Function to draw a ball in the corresponding number slot.
     // Parameters: 
     //     number - The number the ball should be drawn on
-    drawBall: function(number){
+    drawBall: function(number) {
         var ctx = this.canvas.getContext('2d');
 
         for (var i = 0; i <= 37; i++) {
             if (table.numbers[i].value == number.toString()) {
 
-                tableUI.drawCanvas();  // Redraw Canvas to clear previous ball.
+                tableUI.drawCanvas(); // Redraw Canvas to clear previous ball.
 
                 ctx.save();
                 ctx.translate(this.canvas.width / 2, this.canvas.height / 2);
-                ctx.rotate(Math.PI);  // Rotate once to account for outward text
+                ctx.rotate(Math.PI); // Rotate once to account for outward text
                 ctx.rotate(i * 2 * Math.PI / 38); // Rotate radians to place ball
                 ctx.beginPath();
                 ctx.arc(0, 135, 7, 0, 2 * Math.PI, false);

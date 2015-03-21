@@ -8,13 +8,13 @@
 
 // Object to represent player
 var player = {
-    shotCounter : 0,
+    shotCounter: 0,
 
     // Method to shoot at a guessed position.
-    shootPosition: function(letter, number){
+    shootPosition: function(letter, number) {
         this.shotCounter++;
         document.getElementById('shotCounter').innerHTML = 'Shots: ' + this.shotCounter;
-        if (enemy.shootResponse(letter, number)){
+        if (enemy.shootResponse(letter, number)) {
             return true;
         } else {
             return false;
@@ -42,14 +42,14 @@ var enemy = {
             [4, 0, 0, 0, 0, 0, 2]],     // y = 6
 
     // Method to calculate whether a shot hits, and respond appropriately.
-    shootResponse: function(x, y ){
+    shootResponse: function(x, y) {
         var shotValue = this.board[y][x];
 
-        if (shotValue > 0){             // if shotValue > 0, then there is a ship.
+        if (shotValue > 0) { // if shotValue > 0, then there is a ship.
             console.log('Hit!');
             boardUI.textOutput.innerHTML = 'Woohoo!  It\'s a hit!';
-            switch (shotValue) {        // Check which type of ship it is.
-                case 2:                 // Destroyer
+            switch (shotValue) { // Check which type of ship it is.
+                case 2: // Destroyer
                     this.destroyerHP--;
                     if (this.destroyerHP === 0) {
                         console.log('You sunk my destroyer!');
@@ -58,7 +58,7 @@ var enemy = {
                         document.getElementById('shipsRemaining').innerHTML = 'Ships Remaining: ' + this.numShips;
                     }
                     break;
-                case 3:                 // Cruiser
+                case 3: // Cruiser
                     this.cruiserHP--;
                     if (this.cruiserHP === 0) {
                         console.log('You sunk my cruiser!');
@@ -67,7 +67,7 @@ var enemy = {
                         document.getElementById('shipsRemaining').innerHTML = 'Ships Remaining: ' + this.numShips;
                     }
                     break;
-                case 4:                 // Battleship
+                case 4: // Battleship
                     this.battleshipHP--;
                     if (this.battleshipHP === 0) {
                         console.log('You sunk my battleship!');
@@ -76,7 +76,7 @@ var enemy = {
                         document.getElementById('shipsRemaining').innerHTML = 'Ships Remaining: ' + this.numShips;
                     }
                     break;
-                case 5:                 // Carrier
+                case 5: // Carrier
                     this.carrierHP--;
                     if (this.carrierHP === 0) {
                         console.log('You sunk my carrier!');
@@ -90,15 +90,14 @@ var enemy = {
         } else if (shotValue == -1) {
             console.log('You\'ve already shot an enemy here!  Please select another square!');
             return true;
-        }
-         else {
+        } else {
             console.log('Miss!');
             boardUI.textOutput.innerHTML = 'Doh!  You missed.  Shoot again!';
             return false;
         }
 
         // When number of ships is 0, game is over.
-        if (this.numShips === 0){
+        if (this.numShips === 0) {
             console.log('Congratulations, you won the game!');
             console.log('It only took you ' + player.shotCounter + ' shots!');
             boardUI.textOutput.innerHTML += '<br>Congratulations! <br>It only took you ' + player.shotCounter + ' shots to win!';
@@ -111,15 +110,14 @@ var enemy = {
 
 // Object to represent HTML Elements
 var boardUI = {
-    textOutput : document.getElementById('textDisplay'),
-
+    textOutput: document.getElementById('textDisplay'),
 
     createClickFire: function() {
 
         // Create anonymous function to pass in the i and j to use closure
         function createAnonFunction(i, j) {
             var anonFcn = function() {
-                if(player.shootPosition(i,j)){
+                if (player.shootPosition(i, j)) {
                     $(this).css('background-color', 'red');
                 } else {
                     $(this).css('background-color', 'gray');
