@@ -53,7 +53,7 @@ var enemy = {
                     this.destroyerHP--;
                     if (this.destroyerHP === 0) {
                         console.log('You sunk my destroyer!');
-                        boardUI.textOutput.innerHTML += '<br>You sunk my destroyer!'
+                        boardUI.textOutput.innerHTML += '<br>You sunk my destroyer!';
                         this.numShips--;
                         document.getElementById('shipsRemaining').innerHTML = 'Ships Remaining: ' + this.numShips;
                     }
@@ -62,7 +62,7 @@ var enemy = {
                     this.cruiserHP--;
                     if (this.cruiserHP === 0) {
                         console.log('You sunk my cruiser!');
-                        boardUI.textOutput.innerHTML += '<br>You sunk my cruiser!'
+                        boardUI.textOutput.innerHTML += '<br>You sunk my cruiser!';
                         this.numShips--;
                         document.getElementById('shipsRemaining').innerHTML = 'Ships Remaining: ' + this.numShips;
                     }
@@ -71,7 +71,7 @@ var enemy = {
                     this.battleshipHP--;
                     if (this.battleshipHP === 0) {
                         console.log('You sunk my battleship!');
-                        boardUI.textOutput.innerHTML += '<br>You sunk my battleship!'
+                        boardUI.textOutput.innerHTML += '<br>You sunk my battleship!';
                         this.numShips--;
                         document.getElementById('shipsRemaining').innerHTML = 'Ships Remaining: ' + this.numShips;
                     }
@@ -80,7 +80,7 @@ var enemy = {
                     this.carrierHP--;
                     if (this.carrierHP === 0) {
                         console.log('You sunk my carrier!');
-                        boardUI.textOutput.innerHTML += '<br>You sunk my carrier!'
+                        boardUI.textOutput.innerHTML += '<br>You sunk my carrier!';
                         this.numShips--;
                         document.getElementById('shipsRemaining').innerHTML = 'Ships Remaining: ' + this.numShips;
                     }
@@ -102,7 +102,7 @@ var enemy = {
             console.log('Congratulations, you won the game!');
             console.log('It only took you ' + player.shotCounter + ' shots!');
             boardUI.textOutput.innerHTML += '<br>Congratulations! <br>It only took you ' + player.shotCounter + ' shots to win!';
-            boardUI.textOutput.innerHTML += '<br>Hit refresh to play again!'
+            boardUI.textOutput.innerHTML += '<br>Hit refresh to play again!';
             alert('Congratulations, you won the game!\nIt only took you ' + player.shotCounter + ' shots!');
         }
         return true;
@@ -129,24 +129,13 @@ var boardUI = {
         }
 
 
-        // Loop to initialize all click handlers and hover functions
+        // Loop to initialize all click handlers
         for (var i = 0; i < 7; ++i) {
             for (var j = 0; j < 7; ++j) {
                 $('#box' + i + j).click(createAnonFunction(i, j));
             }
         }
     },
-    preloadCards: function() {
-
-        $.preloadImages = function() {
-          for (var i = 0; i < arguments.length; i++) {
-            $('<img />').attr('src', arguments[i]);
-          }
-        };
-
-        $.preloadImages('hoverimage1.jpg','hoverimage2.jpg');
-
-    }
 };
 
 $(document).ready(function() {
