@@ -47,13 +47,13 @@ var enemy = {
 
         if (shotValue > 0) { // if shotValue > 0, then there is a ship.
             console.log('Hit!');
-            boardUI.textOutput.innerHTML = 'Woohoo!  It\'s a hit!';
+            boardUI.setMessage('Woohoo! It\'s a hit!');
             switch (shotValue) { // Check which type of ship it is.
                 case 2: // Destroyer
                     this.destroyerHP--;
                     if (this.destroyerHP === 0) {
                         console.log('You sunk my destroyer!');
-                        boardUI.textOutput.innerHTML += '<br>You sunk my destroyer!';
+                        boardUI.appendMessage('You sunk my destroyer!');
                         this.numShips--;
                         document.getElementById('shipsRemaining').innerHTML = 'Ships Remaining: ' + this.numShips;
                     }
@@ -62,7 +62,7 @@ var enemy = {
                     this.cruiserHP--;
                     if (this.cruiserHP === 0) {
                         console.log('You sunk my cruiser!');
-                        boardUI.textOutput.innerHTML += '<br>You sunk my cruiser!';
+                        boardUI.appendMessage('You sunk my cruiser!');
                         this.numShips--;
                         document.getElementById('shipsRemaining').innerHTML = 'Ships Remaining: ' + this.numShips;
                     }
@@ -71,7 +71,7 @@ var enemy = {
                     this.battleshipHP--;
                     if (this.battleshipHP === 0) {
                         console.log('You sunk my battleship!');
-                        boardUI.textOutput.innerHTML += '<br>You sunk my battleship!';
+                        boardUI.appendMessage('You sunk my battleship!');
                         this.numShips--;
                         document.getElementById('shipsRemaining').innerHTML = 'Ships Remaining: ' + this.numShips;
                     }
@@ -80,7 +80,7 @@ var enemy = {
                     this.carrierHP--;
                     if (this.carrierHP === 0) {
                         console.log('You sunk my carrier!');
-                        boardUI.textOutput.innerHTML += '<br>You sunk my carrier!';
+                        boardUI.appendMessage('You sunk my carrier!');
                         this.numShips--;
                         document.getElementById('shipsRemaining').innerHTML = 'Ships Remaining: ' + this.numShips;
                     }
@@ -88,11 +88,11 @@ var enemy = {
             }
             this.board[y][x] = -1;
         } else if (shotValue == -1) {
-            console.log('You\'ve already shot an enemy here!  Please select another square!');
+            console.log('You\'ve already shot an enemy here! Please select another square!');
             return true;
         } else {
             console.log('Miss!');
-            boardUI.textOutput.innerHTML = 'Doh!  You missed.  Shoot again!';
+            boardUI.setMessage('Doh! You missed. Shoot again!');
             return false;
         }
 
@@ -100,8 +100,8 @@ var enemy = {
         if (this.numShips === 0) {
             console.log('Congratulations, you won the game!');
             console.log('It only took you ' + player.shotCounter + ' shots!');
-            boardUI.textOutput.innerHTML += '<br>Congratulations! <br>It only took you ' + player.shotCounter + ' shots to win!';
-            boardUI.textOutput.innerHTML += '<br>Hit refresh to play again!';
+            boardUI.appendMessage('Congratulations!<br>It only took you ' + player.shotCounter + ' shots to win!');
+            boardUI.appendMessage('Hit refresh to play again!');
             alert('Congratulations, you won the game!\nIt only took you ' + player.shotCounter + ' shots!');
         }
         return true;
@@ -111,6 +111,14 @@ var enemy = {
 // Object to represent HTML Elements
 var boardUI = {
     textOutput: document.getElementById('textDisplay'),
+    
+    setMessage: function(msg) {
+        this.textOutput.innerHTML = msg;
+    },
+    
+    appendMessage: function(msg) {
+        this.textOutput.innerHTML += '<br>' + msg;
+    },
 
     createClickFire: function() {
 
