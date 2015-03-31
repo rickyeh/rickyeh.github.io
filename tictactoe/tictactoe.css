@@ -1,0 +1,55 @@
+body {
+    background-color: #222222;
+    color: #FFFFFF;
+    font-family: Arial;
+}
+
+div {
+    position: relative;
+    box-shadow: 0px 0px 0px 1px #00BEA6 inset;
+    height: 200px;
+    box-sizing: border-box;
+}
+
+.boardCell {
+    height: 125px;
+    width: 125px;
+    float: left;
+    background-color: #2D2D2D;
+    box-shadow: 0px 0px 0px 5px #222222 inset;
+    border-radius: 15px;
+}
+
+.boardCell:hover {
+    background-color: #383838;
+}
+
+#title {
+    height: 100px;
+    font-size: 50px;
+    text-align: center;
+    padding: 20px;
+}
+
+#boardWrapper {
+    height: 375px;
+}
+
+#gameBoard {
+    height: 375px;
+    width: 375px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#iconsWrapper {
+    height: 75px;
+}
+
+#resetButton {
+    height: 50px;
+    width: 50px;
+    top: 12.5px;
+    margin-left: auto;
+    margin-right: auto;
+}
