@@ -1,3 +1,11 @@
+/*
+0h h1 colors
+#00AAC4 - Blue
+#008A9B - Blue Shadow
+#E43A20 - Red
+#B33215 - Red Shadow
+*/
+
 body {
     background-color: #222222;
     color: #FFFFFF;
@@ -9,6 +17,14 @@ div {
     box-shadow: 0px 0px 0px 1px #00BEA6 inset;
     height: 200px;
     box-sizing: border-box;
+}
+
+.xo {
+    display:block;
+    margin: auto;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .boardCell {
