@@ -48,13 +48,13 @@ var playerO = new Player('O');
 var boardUI = {
 
     oString: '<svg class="xo" height="110" width="110">' +
-                '<circle cx="56" cy="57" r="43" stroke="#888888" stroke-width="12" fill-opacity="0" />' + 
+                '<circle cx="56" cy="57" r="43" stroke="#666666" stroke-width="12" fill-opacity="0" />' + 
                 '<circle cx="55" cy="55" r="43" stroke="#E43A20" stroke-width="12" fill-opacity="0" />' + 
              '</svg>',
 
     xString: '<svg class="xo" height="100" width="100">' +
-                '<line x1="11" y1="12" x2="91" y2="92" style="stroke:#888888;stroke-width:12" />' +
-                '<line x1="91" y1="12" x2="11" y2="92" style="stroke:#888888;stroke-width:12" />' +
+                '<line x1="11" y1="12" x2="91" y2="92" style="stroke:#666666;stroke-width:12" />' +
+                '<line x1="91" y1="12" x2="11" y2="92" style="stroke:#666666;stroke-width:12" />' +
                 '<line x1="10" y1="10" x2="90" y2="90" style="stroke:#00AAC4;stroke-width:12" />' +
                 '<line x1="90" y1="10" x2="10" y2="90" style="stroke:#00AAC4;stroke-width:12" />' +
              '</svg>',
@@ -76,6 +76,10 @@ var boardUI = {
         for (var i = 0; i <= 8; ++i) {
             $('#box' + i).click(createAnonFunction(i));
         }
+
+        $('#resetButton').click(function() {
+            location.reload();
+        });
     },
 
     checkVictory: function() {
