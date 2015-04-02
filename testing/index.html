@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Testing Page</title>
+ 
+         <style>
+            body {
+                background-color: blue;
+            }
+            h1 {
+                color: maroon;
+                margin-left: 40px;
+            } 
+
+            #poo {
+                color:white ;
+                background-color: red;
+            }
+
+        </style>
+    </head>
+
+    <body>
+
+    <p>Hello World!</p>
+    <p>Hello World 2</p>
+    <p id="poo">Hello World 3</p>
+
+
+        <script>
+            console.log("Test");
+
+            document.getElementById("poo").innerHTML = "Changed!";
+
+
+
+        </script>
+    </body>
+</html>

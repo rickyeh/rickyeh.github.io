@@ -7,6 +7,7 @@ Hi everyone.  Welcome to the repo that hosts my personal web page.  I will mainl
 * Casino War
 * Roulette
 * Battleship
+* Tic Tac Toe
 
 ## About Me
 
