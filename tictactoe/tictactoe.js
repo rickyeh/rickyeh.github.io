@@ -28,12 +28,12 @@ function player(sign) {
 var boardUI = {
 
     oString: "<svg class='xo' height='100' width='100'>" +
-                "<circle cx='50' cy='50' r='40' stroke='#E43A20' stroke-width='10' fill-opacity='0' />" + 
+                "<circle cx='50' cy='50' r='45' stroke='#E43A20' stroke-width='10' fill-opacity='0' />" + 
              "</svg>",
 
     xString: "<svg class='xo' height='100' width='100'>" +
-                "<line x1='15' y1='15' x2='85' y2='85' style='stroke:#00AAC4;stroke-width:10' />" +
-                "<line x1='85' y1='15' x2='15' y2='85' style='stroke:#00AAC4;stroke-width:10' />" +
+                "<line x1='10' y1='10' x2='90' y2='90' style='stroke:#00AAC4;stroke-width:10' />" +
+                "<line x1='90' y1='10' x2='10' y2='90' style='stroke:#00AAC4;stroke-width:10' />" +
              "</svg>",
 
     createClickHandlers: function() {
@@ -43,10 +43,10 @@ var boardUI = {
             var actionOnClick = function() {
                 console.log('Clicked box');
                 if (currentPlayer === 0) {
-                    $('#box' + i).html(boardUI.oString);
+                    $('#box' + i).hide().html(boardUI.oString).fadeIn('fast');
                     currentPlayer++;
                 } else {
-                    $('#box' + i).html(boardUI.xString);
+                    $('#box' + i).hide().html(boardUI.xString).fadeIn('fast');
                     currentPlayer--;
                 }
             };
