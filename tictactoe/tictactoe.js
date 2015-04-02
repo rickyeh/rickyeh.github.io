@@ -14,18 +14,36 @@ var gameBoard = [[0, 0, 0],
                  [0, 0, 0],
                  [0, 0, 0]];
 
-// var player = {
-//     sign: 0,
-// };
-
-function player(sign) {
+var Player = function Player(sign){
     this.sign = sign;
 
-    function takeTurn(){
+    this.takeTurn = function(i){
+        var x = Math.floor(i/3);
+        var y = i % 3;
+
+        if ( gameBoard[x][y] > 0 ) {
+            console.log('Spot already filled, pick something else!');
+            $('#box' + i).effect( 'shake', {distance: 2, direction: 'down'}, 300);
+            return;
+        } 
+
         totalTurns++;
 
-    }
-}
+        if (this.sign === 'O'){
+            $('#box' + i).hide().html(boardUI.oString).fadeIn('fast');
+            gameBoard[x][y] = 1;
+            currentPlayer++;
+        } else {
+            gameBoard[x][y] = 2;    
+            $('#box' + i).hide().html(boardUI.xString).fadeIn('fast');
+            currentPlayer--;
+        }
+        boardUI.checkVictory();
+    };
+};
+
+var playerX = new Player('X');
+var playerO = new Player('O');
                 
 var boardUI = {
 
@@ -39,25 +57,17 @@ var boardUI = {
              '</svg>',
 
     createClickHandlers: function() {
-
-        // Create anonymous function to pass in the i use closure
+        // Create anonymous function to pass in the i to create closure
         function createAnonFunction(i) {
             var actionOnClick = function() {
                 if (currentPlayer === 0) {
-                    $('#box' + i).hide().html(boardUI.oString).fadeIn('fast');
-                    gameBoard[Math.floor(i/3)][i%3] = 1;
-                    boardUI.checkVictory(1);
-                    currentPlayer++;
+                    playerO.takeTurn(i);
                 } else {
-                    $('#box' + i).hide().html(boardUI.xString).fadeIn('fast');
-                    gameBoard[Math.floor(i/3)][i%3] = 2;
-                    boardUI.checkVictory(2);
-                    currentPlayer--;
+                    playerX.takeTurn(i);
                 }
             };
             return actionOnClick;
         }
-
                 
         // Loop to initialize all click handlers
         for (var i = 0; i <= 8; ++i) {
@@ -65,7 +75,7 @@ var boardUI = {
         }
     },
 
-    checkVictory: function(n) {
+    checkVictory: function() {
 
     }
 };
