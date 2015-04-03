@@ -30,13 +30,13 @@ var Player = function Player(sign){
         if (this.sign === 'O'){
             $('#box' + i + j).hide().html(boardUI.oString).fadeIn('fast');
             gameBoard[i][j] = 1;
-            currentPlayer++;
+            currentPlayer = 1;
         } else {
             gameBoard[i][j] = 2;    
             $('#box' + i + j).hide().html(boardUI.xString).fadeIn('fast');
-            currentPlayer--;
+            currentPlayer = 0;
         }
-        boardUI.checkVictory();
+        boardUI.checkVictory(this.sign);
     };
 };
 
@@ -113,14 +113,59 @@ var boardUI = {
         }
     },
 
-    checkVictory: function() {
+    checkVictory: function(sign) {
         console.log('victory check v1');
 
-        // TODO: 
-        // Check 3 rows
-        // Check 3 Columns
-        // Check 2 Diagonal
+        var searchValue;
 
+        // var matchCount = 0;
+
+        if (sign === 'O') {
+            searchValue = 1;
+        } else {
+            searchValue = 2;
+        }
+
+        // Loop to scan the three rows for victory
+        for (var i = 0; i < boardSize; ++i) {
+            var matchCount = 0;
+
+            for (var j = 0; j < boardSize; ++j) {
+                if (gameBoard[i][j] === searchValue) {
+                    matchCount++;
+                }
+                if (matchCount === 3) {
+                    console.log('Match Found!');
+                    return true;
+                }
+            }
+        }
+
+        // Loop to scan three columns for victory
+        for (var i = 0; i < boardSize; ++i) {
+            var matchCount = 0;
+
+            for (var j = 0; j < boardSize; ++j) {
+                if (gameBoard[j][i] === searchValue) {
+                    matchCount++;
+                }
+                if (matchCount === 3) {
+                    console.log('Match Found!');
+                    return true
+                }
+            }
+        }
+
+        // Scan for Diagonal victory conditions
+        if ( gameBoard[0][0] && gameBoard[1][1] && gameBoard[2][2] == searchValue) {
+            console.log('Diagonal Victory');
+        }
+        if ( gameBoard[0][2] && gameBoard[1][1] && gameBoard[2][0] == searchValue) {
+            console.log('Diagonal Victory');
+        }
+        // TODO: 
+        // Create loop for check diagonals
+        return false;
     }
 };
 
