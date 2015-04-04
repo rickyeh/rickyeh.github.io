@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e302c43d-a225-4e8b-b3b2-57abb7e68d5f" name="Default" comment="" />
+    <list default="true" id="e302c43d-a225-4e8b-b3b2-57abb7e68d5f" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tictactoe/tictactoe.css" afterPath="$PROJECT_DIR$/tictactoe/tictactoe.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tictactoe/tictactoe.js" afterPath="$PROJECT_DIR$/tictactoe/tictactoe.js" />
+    </list>
     <ignored path="rickyeh.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -61,12 +64,19 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/battleship/index.html" />
+      </list>
+    </option>
+  </component>
   <component name="JsGulpfileManager">
     <detection-done>true</detection-done>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="121" />
-    <option name="y" value="73" />
+    <option name="x" value="-149" />
+    <option name="y" value="-1127" />
     <option name="width" value="1151" />
     <option name="height" value="779" />
   </component>
@@ -136,6 +146,7 @@
     <property name="options.lastSelected" value="reference.settingsdialog.IDE.editor.colors.General" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="FullScreen" value="false" />
   </component>
   <component name="RunManager">
     <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
@@ -186,8 +197,8 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="121" y="73" width="1151" height="779" extended-state="1" />
-    <editor active="true" />
+    <frame x="-149" y="-1127" width="1151" height="779" extended-state="0" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />

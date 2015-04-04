@@ -13,13 +13,13 @@ var gameBoard = [[0, 0, 0],
 //      sign - The symbol the player is using, X or O
 // Methods:
 //      takeTurn() - Called on every click of a board cell to place a symbol
-var Player = function Player(sign){
+var Player = function Player(sign) {
     this.sign = sign;
 
-    this.takeTurn = function(i, j){
+    this.takeTurn = function(i, j) {
 
         // Check if spot isn't empty.  If it's occupied, kick out of method and pick another.
-        if ( gameBoard[i][j] > 0 ) {
+        if (gameBoard[i][j] > 0) {
             console.log('Spot already filled, pick something else!');
             $('#box' + i + j).effect( 'shake', {distance: 2, direction: 'right'}, 300);
             return;
@@ -37,9 +37,9 @@ var Player = function Player(sign){
             currentPlayer = 0;
         }
         if (boardUI.checkVictory(this.sign)) {
-            console.log("Game over");
+            boardUI.endGameTitle(this.sign);
         } else if (totalTurns === boardSize * boardSize) { 
-            console.log("Game is tied");
+            boardUI.endGameTitle('T');
         }
     };
 };
@@ -56,6 +56,7 @@ var playerO = new Player('O');
 //      createClickHandlers() - Initializes all the click handlers for each board cell and button
 //      resetGame() - Resets game to intial state
 //      checkVictory() - Checks the board for victories.  Called after each successful takeTurn
+//      endGame() - Called when game ends to change title message accordingly
 var boardUI = {
 
     oString: '<svg class="xo" height="110" width="110">' +
@@ -71,7 +72,7 @@ var boardUI = {
     createGrid: function(n) {
         for (var i = 0; i < n; ++i) {
             for (var j = 0; j < n; ++j) {
-                var boxString = '<div class="boardCell" id="box' + i + j +'"></div>';
+                var boxString = '<div class="boardCell" id="box' + i + j + '"></div>';
                 $('#gameBoard').append(boxString);
             }
         }
@@ -110,6 +111,8 @@ var boardUI = {
         currentPlayer = 0;
         totalTurns = 0;
 
+        $('#titleText').fadeOut('slow');          
+
         // Fade out all X and O's
         // TODO: Fade them out with a random delay.
         for (var i = 0; i < 9; i++) {
@@ -135,7 +138,6 @@ var boardUI = {
                     matchCount++;
                 }
                 if (matchCount === 3) {
-                    console.log('Match Found!');
                     return true;
                 }
             }
@@ -150,7 +152,6 @@ var boardUI = {
                     matchCount++;
                 }
                 if (matchCount === 3) {
-                    console.log('Match Found!');
                     return true;
                 }
             }
@@ -158,14 +159,27 @@ var boardUI = {
 
         // Scan for Diagonal victory conditions
         if (gameBoard[0][0] == searchValue && gameBoard[1][1] == searchValue && gameBoard[2][2] == searchValue) {
-            console.log('Diagonal Victory');
             return true;
         } else if (gameBoard[0][2] == searchValue && gameBoard[1][1] == searchValue && gameBoard[2][0] == searchValue) {
-            console.log('Diagonal Victory');
             return true;
         } else {
             return false;
-       }
+        }
+    },
+
+    endGameTitle: function(result) {
+
+        $('#titleText').fadeOut('slow');
+        window.setTimeout(changeTitle, 610);
+
+        function changeTitle(){
+            if(result === 'T'){
+                $('#titleText').html('Tie Game!'); 
+            } else {
+                $('#titleText').html(result + ' Wins!');            
+            }
+            $('#titleText').fadeIn('slow');
+        }
     }
 };
 
