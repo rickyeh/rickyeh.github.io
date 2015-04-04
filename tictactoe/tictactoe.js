@@ -36,7 +36,11 @@ var Player = function Player(sign){
             $('#box' + i + j).hide().html(boardUI.xString).fadeIn('fast');
             currentPlayer = 0;
         }
-        boardUI.checkVictory(this.sign);
+        if (boardUI.checkVictory(this.sign)) {
+            console.log("Game over");
+        } else if (totalTurns === boardSize * boardSize) { 
+            console.log("Game is tied");
+        }
     };
 };
 
@@ -114,11 +118,7 @@ var boardUI = {
     },
 
     checkVictory: function(sign) {
-        console.log('victory check v1');
-
         var searchValue;
-
-        // var matchCount = 0;
 
         if (sign === 'O') {
             searchValue = 1;
@@ -151,21 +151,21 @@ var boardUI = {
                 }
                 if (matchCount === 3) {
                     console.log('Match Found!');
-                    return true
+                    return true;
                 }
             }
         }
 
         // Scan for Diagonal victory conditions
-        if ( gameBoard[0][0] && gameBoard[1][1] && gameBoard[2][2] == searchValue) {
+        if (gameBoard[0][0] == searchValue && gameBoard[1][1] == searchValue && gameBoard[2][2] == searchValue) {
             console.log('Diagonal Victory');
-        }
-        if ( gameBoard[0][2] && gameBoard[1][1] && gameBoard[2][0] == searchValue) {
+            return true;
+        } else if (gameBoard[0][2] == searchValue && gameBoard[1][1] == searchValue && gameBoard[2][0] == searchValue) {
             console.log('Diagonal Victory');
-        }
-        // TODO: 
-        // Create loop for check diagonals
-        return false;
+            return true;
+        } else {
+            return false;
+       }
     }
 };
 
