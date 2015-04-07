@@ -38,6 +38,7 @@ var Player = function Player(sign) {
         }
         if (boardUI.checkVictory(this.sign)) {
             boardUI.endGameTitle(this.sign);
+            boardUI.disableBoard();
         } else if (totalTurns === boardSize * boardSize) { 
             boardUI.endGameTitle('T');
         }
@@ -56,7 +57,8 @@ var playerO = new Player('O');
 //      createClickHandlers() - Initializes all the click handlers for each board cell and button
 //      resetGame() - Resets game to intial state
 //      checkVictory() - Checks the board for victories.  Called after each successful takeTurn
-//      endGame() - Called when game ends to change title message accordingly
+//      endGameTitle() - Called when game ends to change title message accordingly
+//      disableBoard() - Sets all board values to 3 to disable additional moves
 var boardUI = {
 
     oString: '<svg class="xo" height="110" width="110">' +
@@ -106,6 +108,12 @@ var boardUI = {
     },
 
     resetGame: function() {
+
+        // Disable reset function if nothing has been played yet
+        if (totalTurns == 0) {
+            return;
+        }
+
         gameBoard = [[0, 0, 0],[0, 0, 0],[0, 0, 0]];
 
         currentPlayer = 0;
@@ -179,6 +187,15 @@ var boardUI = {
                 $('#titleText').html(result + ' Wins!');            
             }
             $('#titleText').fadeIn('slow');
+        }
+    },
+
+    disableBoard: function() {
+
+        for (var i = 0; i < boardSize; ++i) {
+            for (var j = 0; j < boardSize; ++j) {
+                gameBoard[i][j] = 3;
+            }
         }
     }
 };
