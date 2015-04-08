@@ -1,20 +1,12 @@
-var boardSize = 3;      // Set game board's size.  TODO: Make value changable
-var currentPlayer = 0;  // Variable to track whose turn it is - 0 for O, 1 for X
-var totalTurns = 0;     // Counter to track total moves to detect tiea
+var BLANK = 0;
+var PLAYER_O = 1;
+var PLAYER_X = 2;
 
-// Create 2D Array based on board size
-var gameBoard = new Array(boardSize);
+var boardSize = 3;              // Set game board's size.  TODO: Make value changable
+var currentPlayer = PLAYER_O;   // Variable to track whose turn it is - 0 for O, 1 for X
+var totalTurns = 0;             // Counter to track total moves to detect tie
 
-for (var i = 0; i < boardSize; i++) {
-    gameBoard[i] = new Array(boardSize);
-}
 
-// Set all elements of the array to 0
-for (var i = 0; i < boardSize; i++) {
-    for (var j = 0; j < boardSize; j++) {
-        gameBoard[i][j] = 0;
-    }
-}
 
 // Object: Represents a player in the game
 // Values:
@@ -27,7 +19,7 @@ var Player = function Player(sign) {
     this.takeTurn = function(i, j) {
 
         // Check if spot isn't empty.  If it's occupied, kick out of method and pick another.
-        if (gameBoard[i][j] > 0 || boardUI.isDisabled) {
+        if (gameBoard[i][j] !== BLANK || boardUI.isDisabled) {
             $('#box' + i + j).effect( 'shake', {distance: 2, direction: 'right'}, 300);
             return;
         } 
@@ -36,12 +28,12 @@ var Player = function Player(sign) {
 
         if (this.sign === 'O'){
             $('#box' + i + j).hide().html(boardUI.oString).fadeIn('fast');
-            gameBoard[i][j] = 1;
-            currentPlayer = 1;
+            gameBoard[i][j] = PLAYER_O;
+            currentPlayer = PLAYER_X;
         } else {
-            gameBoard[i][j] = 2;    
+            gameBoard[i][j] = PLAYER_X;    
             $('#box' + i + j).hide().html(boardUI.xString).fadeIn('fast');
-            currentPlayer = 0;
+            currentPlayer = PLAYER_O;
         }
         if (boardUI.checkVictory(this.sign)) {
             boardUI.showEndGameMessage(this.sign);
@@ -51,9 +43,7 @@ var Player = function Player(sign) {
     };
 };
 
-// Create two player objects with constructors
-var playerX = new Player('X');
-var playerO = new Player('O');
+
 
 // Object: Represents the board and UI
 // Values:
@@ -63,7 +53,9 @@ var playerO = new Player('O');
 //      createGrid(n) - Inserts the DIVs to the gameBoard via a jQuery loop
 //      createClickHandlers() - Initializes all the click handlers for each board cell and button
 //      resetGame() - Resets game to intial state
+//      init () - Initializes the board with all zeroes
 //      checkVictory() - Checks the board for victories.  Called after each successful takeTurn
+//      highlightBox() - Highlights the div by adding a class. Used to show winning symbols.
 //      showEndGameMessage() - Called when game ends to change title message accordingly
 
 var boardUI = {
@@ -93,7 +85,7 @@ var boardUI = {
         // Create anonymous function to pass in the i to create closure
         function createAnonFunction(i, j) {
             var actionOnClick = function() {
-                if (currentPlayer === 0) {
+                if (currentPlayer === PLAYER_O) {
                     playerO.takeTurn(i, j);
                 } else {
                     playerX.takeTurn(i, j);
@@ -122,26 +114,48 @@ var boardUI = {
             return;
         }
 
-        if (boardUI.isDisabled === true) {
+        if (this.isDisabled === true) {
             $('#titleText').fadeOut('slow'); 
         }
 
-        boardUI.isDisabled = false;         // Re-enable ability to click board
+        // De-highlight the winning boxes
+        setTimeout(function() {
+            $('div').removeClass('highlightBox');
+        }, 1200);
 
-        // Reset all gameboard array elements to 0
-        for (var i = 0; i < boardSize; i++) {
-            for (var j = 0; j < boardSize; j++) {
-                gameBoard[i][j] = 0;
-            }
-        }
-
-        currentPlayer = 0;
+        currentPlayer = PLAYER_O;
         totalTurns = 0;
 
-        // Fade out all X and O's
-        // TODO: Fade them out with a random delay.
-        for (var i = 0; i < 9; i++) {
-            $('.xo').fadeOut('slow');
+        // Reset all gameboard array elements to blank
+        this.init();
+
+        // Loop through SVG elements of class .xo to fade out at random times
+        $('.xo').each(function(i, el) {
+
+            var delay = 200; // Set minimum delay value
+            delay = delay + Math.random() * 500; // Add on random delay up to 500 ms
+
+            setTimeout(function() {  // Call setTimeout to delay the fadeOut
+                var fadeDelay = 400;
+                fadeDelay = fadeDelay + Math.random() * 400;
+
+                $(el).fadeOut(fadeDelay);
+            }, delay);
+        });
+
+        // Remove all .xo markers on board and re-enable clickability
+        setTimeout(function() {
+            $('.xo').remove();
+            boardUI.isDisabled = false;
+        }, 1300);
+    },
+
+    // Initialize the board will all zeros
+    init: function() {
+        for (var i = 0; i < boardSize; i++) {
+            for (var j = 0; j < boardSize; j++) {
+                gameBoard[i][j] = BLANK;
+            }
         }
     },
 
@@ -149,34 +163,40 @@ var boardUI = {
         var searchValue;
 
         if (sign === 'O') {
-            searchValue = 1;
+            searchValue = PLAYER_O;
         } else {
-            searchValue = 2;
+            searchValue = PLAYER_X;
         }
 
         // Loop to scan the three rows for victory
-        for (var i = 0; i < boardSize; ++i) {
+        for (var row = 0; row < boardSize; ++row) {
             var matchCount = 0;
 
-            for (var j = 0; j < boardSize; ++j) {
-                if (gameBoard[i][j] === searchValue) {
+            for (var col = 0; col < boardSize; ++col) {
+                if (gameBoard[row][col] === searchValue) {
                     matchCount++;
                 }
                 if (matchCount === 3) {
+                    boardUI.highlightBox(row,0);
+                    boardUI.highlightBox(row,1);
+                    boardUI.highlightBox(row,2);
                     return true;
                 }
             }
         }
 
         // Loop to scan three columns for victory
-        for (var i = 0; i < boardSize; ++i) {
+        for (var col = 0; col < boardSize; ++col) {
             var matchCount = 0;
 
-            for (var j = 0; j < boardSize; ++j) {
-                if (gameBoard[j][i] === searchValue) {
+            for (var row = 0; row < boardSize; ++row) {
+                if (gameBoard[row][col] === searchValue) {
                     matchCount++;
                 }
                 if (matchCount === 3) {
+                    boardUI.highlightBox(0, col);
+                    boardUI.highlightBox(1, col);
+                    boardUI.highlightBox(2, col);
                     return true;
                 }
             }
@@ -184,12 +204,22 @@ var boardUI = {
 
         // Scan for Diagonal victory conditions
         if (gameBoard[0][0] == searchValue && gameBoard[1][1] == searchValue && gameBoard[2][2] == searchValue) {
+            boardUI.highlightBox(0, 0);
+            boardUI.highlightBox(1, 1);
+            boardUI.highlightBox(2, 2);
             return true;
         } else if (gameBoard[0][2] == searchValue && gameBoard[1][1] == searchValue && gameBoard[2][0] == searchValue) {
+            boardUI.highlightBox(0, 2);
+            boardUI.highlightBox(1, 1);
+            boardUI.highlightBox(2, 0);
             return true;
         } else {
             return false;
         }
+    },
+
+    highlightBox: function(row, col) {
+        $('#box' + row + col).addClass('highlightBox');
     },
 
     showEndGameMessage: function(result) {
@@ -210,8 +240,22 @@ var boardUI = {
     },
 };
 
+// Create two player objects with constructors
+var playerX = new Player('X');
+var playerO = new Player('O');
+
+var gameBoard = new Array(boardSize);
+
+// Create 2D Array based on board size
+for (var i = 0; i < boardSize; i++) {
+    gameBoard[i] = new Array(boardSize);
+}
+
 // Main function to load the page with desired board size.
 $(document).ready(function() {
+    // Initialize board UI
+    boardUI.init();
+
     boardUI.createGrid(boardSize);
     boardUI.createClickHandlers();
 });
