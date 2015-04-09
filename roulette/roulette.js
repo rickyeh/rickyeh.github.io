@@ -347,7 +347,7 @@ var tableUI = {
             ctx.restore();
         }
     },
-    // Function to draw a ball in the corresponding number slot.
+    // Method: Draws a ball in the corresponding number slot.
     // Parameters: 
     //     number - The number the ball should be drawn on
     drawBall: function(number) {
@@ -376,16 +376,23 @@ var tableUI = {
 
 };
 
-// Method: Starts a new game.  Resets bankroll to default value.
+// Function: Starts a new game.  Resets bankroll to default value.
 function newGame() {
     console.log('New game is starting...');
     table.output.innerHTML = 'New game is starting...';
-    player.bankroll = 100;
+
+    // Checks if there is query parameter bankroll.  If so, set as bankroll.
+    if (getQueryParameters('bankroll')) {
+        player.bankroll = getQueryParameters('bankroll');
+    } else {
+        player.bankroll = 100;  // Otherwise, default bankroll is 100.
+    }
+
     player.betAmt = 1;
     player.bankroll_output.innerHTML = 'Bankroll: ' + player.bankroll;
 }
 
-// Method: Creates click handlers for the DIVs
+// Function: Creates click handlers for the DIVs
 function createBets() {
 
     // Anonymous function to pass in captured value.
@@ -416,6 +423,24 @@ function createBets() {
     $('#box00').click(function() {
         player.bet('00');
     });
+}
+
+// Function: Gets the query parameter for any variable specified
+function getQueryParameters(variable){
+    if (location.search === '') {
+        return false;
+    }
+
+    var queryString = window.location.search.substring(1); // Gets the query string, drops the ?
+    var arrayOfVars = queryString.split('&');  // Splits multiple variables delimited by '&'
+
+    for (var i = 0; arrayOfVars.length; i++) {
+        var pair = arrayOfVars[i].split('=');
+        if (pair[0] === variable) {
+            return parseInt(pair[1]);
+        }    
+    }
+    return false;
 }
 
 
