@@ -114,6 +114,8 @@ var boardUI = {
             return;
         }
 
+        boardUI.isDisabled = true;
+
         if (this.isDisabled === true) {
             $('#titleText').fadeOut('slow'); 
         }
