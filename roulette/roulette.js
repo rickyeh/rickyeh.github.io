@@ -381,11 +381,13 @@ function newGame() {
     console.log('New game is starting...');
     table.output.innerHTML = 'New game is starting...';
 
-    // Checks if there is query parameter bankroll.  If so, set as bankroll.
-    if (getQueryParameters('bankroll')) {
-        player.bankroll = getQueryParameters('bankroll');
+    var queryParams = getQueryParams();  // Create object of query parameters
+
+    // If bankroll query param exists, set as bankroll.
+    if (queryParams.bankroll === undefined) {
+        player.bankroll = 100;
     } else {
-        player.bankroll = 100;  // Otherwise, default bankroll is 100.
+        player.bankroll = parseInt(queryParams.bankroll);
     }
 
     player.betAmt = 1;
@@ -426,21 +428,20 @@ function createBets() {
 }
 
 // Function: Gets the query parameter for any variable specified
-function getQueryParameters(variable){
-    if (location.search === '') {
-        return false;
-    }
+function getQueryParams() {
 
     var queryString = window.location.search.substring(1); // Gets the query string, drops the ?
-    var arrayOfVars = queryString.split('&');  // Splits multiple variables delimited by '&'
 
-    for (var i = 0; arrayOfVars.length; i++) {
+    var object = {};
+
+    var arrayOfVars = queryString.split('&'); // Splits multiple variables delimited by '&'
+
+    for (var i = 0; i < arrayOfVars.length; i++) {
         var pair = arrayOfVars[i].split('=');
-        if (pair[0] === variable) {
-            return parseInt(pair[1]);
-        }    
+
+        object[pair[0]] = pair[1];
     }
-    return false;
+    return object;
 }
 
 

@@ -26,7 +26,6 @@ div {
 }
 
 button {
-
     width: 130px;
     height: 100px;
     font-size: 20px;
@@ -71,10 +70,23 @@ button {
 }
 
 .black {
-    background-color: rgba(0,0,0,0.7);
+    background-color: rgba(0,0,0,0.6);
 }
+
 .red {
     background-color: rgba(255,0,0,0.7);
+}
+
+.betGreen:hover {
+    background-color: rgba(0,255,0,1);
+}
+
+.black:hover {
+    background-color: rgba(0,0,0,1);
+}
+
+.red:hover {
+    background-color: rgba(255,0,0,1);
 }
 
 .infoBox {
