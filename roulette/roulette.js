@@ -19,6 +19,8 @@ var player = {
     //      number - the number or color that is bet
     bet: function(number) {
         this.bankroll = this.bankroll - this.betAmt;
+        localStorage.setItem('bankroll',this.bankroll);
+
         this.betNumber = number;
 
         this.bankroll_output.innerHTML = 'Bankroll: ' + this.bankroll;
@@ -179,6 +181,7 @@ var table = {
         }
         console.log(player.bankroll);
         console.log('Current Bankroll is : ' + player.bankroll);
+        localStorage.setItem('bankroll', player.bankroll);
     },
 };
 
@@ -376,18 +379,46 @@ var tableUI = {
 
 };
 
-// Function: Starts a new game.  Resets bankroll to default value.
-function newGame() {
+// Function: Resets bankroll to either query parameter or default 100 chips.
+// Called when reset button is pressed.
+function resetGame() {
+    console.log('Resetting bankroll and bets to default...');
+    table.output.innerHTML = '<br>Resetting bankroll and bets to default.';
+
+    var queryParams = getQueryParams(); // Create object of query parameters
+
+    // If bankroll query param exists, set as bankroll.
+    if (queryParams.bankroll === undefined) {
+        player.bankroll = 100;
+
+    } else {
+        player.bankroll = parseInt(queryParams.bankroll);
+        localStorage.setItem('bankroll',this.bankroll);
+    }
+
+    player.betAmt = 1;
+    player.bankroll_output.innerHTML = 'Bankroll: ' + player.bankroll;
+}
+
+// Function: Starts or resumes a game.  Resets bankroll to either query parameter,
+// localStorage amount, or default bankroll.
+function initGame() {
     console.log('New game is starting...');
-    table.output.innerHTML = 'New game is starting...';
+    table.output.innerHTML = '<br>New game is starting...';
 
     var queryParams = getQueryParams();  // Create object of query parameters
 
     // If bankroll query param exists, set as bankroll.
     if (queryParams.bankroll === undefined) {
-        player.bankroll = 100;
-    } else {
+        player.bankroll = localStorage.getItem('bankroll');
+
+        if (player.bankroll === null){
+            player.bankroll = 100;
+        }
+        
+     } else {
         player.bankroll = parseInt(queryParams.bankroll);
+        localStorage.setItem('bankroll',this.bankroll);
     }
 
     player.betAmt = 1;
@@ -447,7 +478,7 @@ function getQueryParams() {
 
 // MAIN PROGRAM STARTS HERE
 $(function() {
-    newGame();
+    initGame();
     tableUI.drawCanvas();
     tableUI.drawBall('0');
     createBets();
