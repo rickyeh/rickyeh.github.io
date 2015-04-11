@@ -385,26 +385,16 @@ function resetGame() {
     console.log('Resetting bankroll and bets to default...');
     table.output.innerHTML = '<br>Resetting bankroll and bets to default.';
 
-    var queryParams = getQueryParams(); // Create object of query parameters
+    localStorage.removeItem('bankroll');
 
-    // If bankroll query param exists, set as bankroll.
-    if (queryParams.bankroll === undefined) {
-        player.bankroll = 100;
-
-    } else {
-        player.bankroll = parseInt(queryParams.bankroll);
-        localStorage.setItem('bankroll',this.bankroll);
-    }
-
-    player.betAmt = 1;
-    player.bankroll_output.innerHTML = 'Bankroll: ' + player.bankroll;
+    initGame();
 }
 
 // Function: Starts or resumes a game.  Resets bankroll to either query parameter,
 // localStorage amount, or default bankroll.
 function initGame() {
     console.log('New game is starting...');
-    table.output.innerHTML = '<br>New game is starting...';
+    table.output.innerHTML += '<br>New game is starting...';
 
     var queryParams = getQueryParams();  // Create object of query parameters
 
@@ -418,8 +408,8 @@ function initGame() {
         
      } else {
         player.bankroll = parseInt(queryParams.bankroll);
-        localStorage.setItem('bankroll',this.bankroll);
     }
+    localStorage.setItem('bankroll',this.bankroll);
 
     player.betAmt = 1;
     player.bankroll_output.innerHTML = 'Bankroll: ' + player.bankroll;
