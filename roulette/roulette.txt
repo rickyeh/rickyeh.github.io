@@ -1,8 +1,0 @@
-Features
-    - Graphic of a roulette wheel
-    - Graphic of roulette betting area
-    - Way to keep track of amount of money
-    - Betting System
-
-Bugs
-    - Fix Border Widths
