@@ -23,7 +23,13 @@ body {
 
 .project-thumbnail {
   width: 100%;
-  max-height: 125px;
+  height: 125px;
+}
+
+@media (max-width: 767px) {
+  .project-thumbnail {
+    width: 40%;
+  }
 }
 
 .project-label {
