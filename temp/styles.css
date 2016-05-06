@@ -1,0 +1,29 @@
+body {
+  font-family: "Helvetica Neue", "Helvetica", "Arial";
+  font-size: 2em;
+  background-color: #222;
+  color: #FFF;
+}
+
+div {
+  padding: 10px 0;
+}
+
+.center {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+#city-name {
+  color: #E43A20;  
+}
+
+#icon {
+  width: 10%;
+}
+
+#temp {
+  color: #00AAC4;
+  font-size: 2.5em;
+}
