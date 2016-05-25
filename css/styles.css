@@ -1,10 +1,18 @@
 body {
-  font-family: 'Open Sans';
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
   font-weight: 300;
 }
 
 .spacer {
   margin-bottom: 25px;
+}
+
+.no-margin {
+  margin: 0;
+}
+
+.top-bot-margin {
+  margin: 10px 0;
 }
 
 .project-container {
@@ -18,7 +26,6 @@ body {
   /*box-shadow: 0 0 0 1px #42dca3;*/
   cursor: pointer;
   color: white;
-
 }
 
 .project-thumbnail {
@@ -46,6 +53,21 @@ body {
   border: none;
   background-color: transparent;
   color: inherit;
+}
+
+.project-screenshot-landscape {
+  width: 100%;
+}
+
+.project-info {
+  font-size: 1.1em;
+  text-align: left;
+  margin: 20px 0;
+}
+
+.no-bg {
+  background: none;
+  background-color: #333;
 }
 
 #about {
