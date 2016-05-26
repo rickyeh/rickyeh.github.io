@@ -19,6 +19,10 @@ body {
   margin-top: 100px;
 }
 
+.med-top-margin {
+  margin-top: 50px;
+}
+
 .project-container {
 /*  padding-left: 0;
   padding-right: 0;*/
