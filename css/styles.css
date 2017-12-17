@@ -54,7 +54,7 @@ body {
 
 @media (max-width: 767px) {
   .project-thumbnail {
-    width: 40%;
+    width: 100%;
   }
 }
 
